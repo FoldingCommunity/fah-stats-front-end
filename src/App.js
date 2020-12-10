@@ -9,7 +9,7 @@ const App = () => {
       <PageHeader
         title={(
           <Fragment>
-            <img alt='FOLDING@HOME' src='/logo-2.png' height='50' />
+            <img alt='FOLDING@HOME' src='logo-2.png' height='50' />
           </Fragment>
         )}
       />
