@@ -1,5 +1,4 @@
 ## Folding@Home Statistics
----
 
 ### Demo
 https://foldingcommunity.github.io/fah-stats-front-end/
