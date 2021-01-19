@@ -1,0 +1,58 @@
+// Fetch.js
+const apiHost = '/api';
+const objectToQueryString = (obj) => {
+  const kv = Object.keys(obj).map((key) => {
+    const val = obj[key];
+    let ret = '';
+
+    if (typeof val !== 'undefined') {
+      ret = `${encodeURIComponent(key)}=${encodeURIComponent(val)}`;
+    }
+    return ret;
+  }).filter((k) => k);
+
+  return (kv.length ? `?${kv.join('&')}` : '');
+};
+const generateErrorResponse = (message) => ({
+  status: 'error',
+  message,
+});
+
+async function request(url, params, method = 'GET') {
+  let modUrl = url;
+  const options = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  if (params) {
+    if (method === 'GET') {
+      modUrl += objectToQueryString(params);
+    } else {
+      options.body = JSON.stringify(params);
+    }
+  }
+
+  const response = await fetch(apiHost + modUrl, options);
+
+  if (response.status !== 200) {
+    return generateErrorResponse('The server responded with an unexpected status.');
+  }
+  const result = await response.json();
+
+  return result;
+}
+
+const get = (url, params) => request(url, params);
+const post = (url, params) => request(url, params, 'POST');
+const put = (url, params) => request(url, params, 'PUT');
+const del = (url, params) => request(url, params, 'DELETE');
+
+export default {
+  get,
+  post,
+  put,
+  del,
+};

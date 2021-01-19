@@ -2,12 +2,22 @@ import {
   Table, Statistic, Space, Tabs, Typography,
 } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import React, { Fragment } from 'react';
-import data from 'modules/DataTabs/data.json';
+import React, { useEffect } from 'react';
+import { getDonors, getTeams, getTeamsMonthly } from 'store/stats';
+import { useDispatch, useSelector } from 'react-redux';
 
 const { Text } = Typography;
 const { TabPane } = Tabs;
 const DataTabs = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTeamsMonthly({}));
+    dispatch(getTeams({}));
+    dispatch(getDonors({}));
+  }, []);
+
+  const stats = useSelector((state) => state.stats);
   const columns = [
     {
       title: 'Rank',
@@ -89,28 +99,21 @@ const DataTabs = () => {
         <TabPane tab="Team Monthly" key="1">
           <Table
             columns={columns}
-            dataSource={data.foldingathome_apis[0].response.results}
+            dataSource={stats?.teamsMonthly?.results}
             pagination={{ defaultPageSize: 100 }}
           />
         </TabPane>
         <TabPane tab="Team" key="2">
           <Table
             columns={columns}
-            dataSource={data.foldingathome_apis[1].response.results}
+            dataSource={stats?.teams?.results}
             pagination={{ defaultPageSize: 100 }}
           />
         </TabPane>
         <TabPane tab="Donor" key="3">
           <Table
             columns={columns}
-            dataSource={data.foldingathome_apis[2].response.results}
-            pagination={{ defaultPageSize: 100 }}
-          />
-        </TabPane>
-        <TabPane tab="OS Stats" key="4">
-          <Table
-            columns={columns}
-            dataSource={data.foldingathome_apis[5].response.results}
+            dataSource={stats?.donors?.results}
             pagination={{ defaultPageSize: 100 }}
           />
         </TabPane>
