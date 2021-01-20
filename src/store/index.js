@@ -1,12 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import stats from 'store/stats';
+import stats from 'store/stats/index';
 
 const reducer = combineReducers({
   stats,
 });
-const store = configureStore({
-  reducer,
-});
 
-export default store;
+export default configureStore({ reducer });

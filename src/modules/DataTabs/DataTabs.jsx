@@ -3,7 +3,9 @@ import {
 } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
-import { getDonors, getTeams, getTeamsMonthly } from 'store/stats';
+import {
+  getDonors, getTeams, getTeamsMonthly, getOs,
+} from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const { Text } = Typography;
@@ -15,6 +17,7 @@ const DataTabs = () => {
     dispatch(getTeamsMonthly({}));
     dispatch(getTeams({}));
     dispatch(getDonors({}));
+    dispatch(getOs({}));
   }, []);
 
   const stats = useSelector((state) => state.stats);
@@ -117,6 +120,13 @@ const DataTabs = () => {
             pagination={{ defaultPageSize: 100 }}
           />
         </TabPane>
+        {/* <TabPane tab="Os" key="4">
+          <Table
+            columns={columns}
+            dataSource={stats?.os}
+            pagination={{ defaultPageSize: 100 }}
+          />
+        </TabPane> */}
       </Tabs>
     </>
   );

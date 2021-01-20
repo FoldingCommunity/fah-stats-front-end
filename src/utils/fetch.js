@@ -1,5 +1,4 @@
 // Fetch.js
-const apiHost = '/api';
 const objectToQueryString = (obj) => {
   const kv = Object.keys(obj).map((key) => {
     const val = obj[key];
@@ -35,7 +34,7 @@ async function request(url, params, method = 'GET') {
     }
   }
 
-  const response = await fetch(apiHost + modUrl, options);
+  const response = await fetch(modUrl, options);
 
   if (response.status !== 200) {
     return generateErrorResponse('The server responded with an unexpected status.');
