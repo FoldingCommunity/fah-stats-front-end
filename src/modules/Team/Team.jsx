@@ -16,6 +16,14 @@ const Team = () => {
 
   const stats = useSelector((state) => state.stats);
   const columns = [
+    // id: 0
+    // name: "Default (No team specified)"
+    // founder: "csnow"
+    // url: "https://foldingathome.org/"
+    // logo: "https://foldingathome.org/logo.png"
+    // score: 2948502760133
+    // wus: 293045343
+    // rank: 1
     {
       title: 'Rank',
       dataIndex: 'rank',
@@ -41,12 +49,19 @@ const Team = () => {
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
-      title: 'Credit',
-      dataIndex: 'credit',
-      key: 'credit',
-      align: 'right',
+      title: 'Founder',
+      dataIndex: 'founder',
+      key: 'founder',
       render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.credit - b.credit,
+    },
+    {
+      title: 'Score',
+      dataIndex: 'score',
+      key: 'score',
+      align: 'right',
+      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      sorter: (a, b) => a.wus - b.wus,
     },
     {
       title: 'WUs',
@@ -56,18 +71,12 @@ const Team = () => {
       render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },
-    {
-      title: 'Team',
-      dataIndex: 'team',
-      key: 'team',
-      sorter: (a, b) => a.name.localeCompare(b.name),
-    },
   ];
 
   return (
     <DataTable
       columns={columns}
-      dataSource={stats?.teams?.results}
+      dataSource={stats?.team}
       pagination={{ defaultPageSize: 100 }}
     />
   );

@@ -5,17 +5,17 @@ const slice = createSlice({
   name: 'stats',
   initialState: {},
   reducers: {
-    donors: (state, action) => {
+    donor: (state, action) => {
       // eslint-disable-next-line no-param-reassign
       state.donors = action.payload;
     },
-    teams: (state, action) => {
+    team: (state, action) => {
       // eslint-disable-next-line no-param-reassign
-      state.teams = action.payload;
+      state.team = action.payload;
     },
-    teamsMonthly: (state, action) => {
+    teamMonthly: (state, action) => {
       // eslint-disable-next-line no-param-reassign
-      state.teamsMonthly = action.payload;
+      state.teamMonthly = action.payload;
     },
     os: (state, action) => {
       // eslint-disable-next-line no-param-reassign

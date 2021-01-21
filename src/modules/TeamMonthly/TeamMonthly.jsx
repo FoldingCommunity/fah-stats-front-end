@@ -2,6 +2,7 @@ import {
   Statistic, Space, Typography,
 } from 'antd';
 import DataTable from 'elements/DataTable/DataTable';
+import SearchForm from 'elements/SearchForm/SearchForm';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
 import { getTeamMonthly } from 'store/stats/actions';
@@ -92,11 +93,14 @@ const TeamMonthly = () => {
   ];
 
   return (
-    <DataTable
-      columns={columns}
-      dataSource={stats?.teamsMonthly}
-      pagination={{ defaultPageSize: 100 }}
-    />
+    <>
+      <SearchForm />
+      <DataTable
+        columns={columns}
+        dataSource={stats?.teamMonthly}
+        pagination={{ defaultPageSize: 100 }}
+      />
+    </>
   );
 };
 

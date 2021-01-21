@@ -14,7 +14,7 @@ const styles = {
     display: inline-block;
     font-family: Raleway;
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: white;
     border-bottom: 2px solid transparent;
     padding: .5rem 1rem;

@@ -54,7 +54,7 @@ export const getTeam = ({
       search_type: teamNameSearchType,
       team: teamId,
     });
-    dispatch(team(formatList(res)));
+    dispatch(team(res));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
