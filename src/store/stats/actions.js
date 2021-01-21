@@ -1,7 +1,7 @@
 import slice from 'store/stats/slice';
 import fetch from 'utils/fetch';
 
-const statsHost = process.env.statsHost || '/stats';
+const statsHost = process.env.statsHost || 'https://stats.foldingathome.org';
 const apiHost = process.env.apiHost || 'https://api2.foldingathome.org';
 const formatList = (list) => {
   const kvList = [];
