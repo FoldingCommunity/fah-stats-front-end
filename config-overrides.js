@@ -1,8 +1,11 @@
-const { override, addLessLoader } = require('customize-cra');
+const { override, addLessLoader, addBabelPreset } = require('customize-cra');
 
 const customOverrides = (config) => config;
 
 module.exports = override(
+  addBabelPreset([
+    '@emotion/babel-preset-css-prop',
+  ]),
   customOverrides,
   addLessLoader({
     lessOptions: {
