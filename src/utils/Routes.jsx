@@ -5,7 +5,10 @@ import {
   Route,
   useLocation,
 } from 'react-router-dom';
-import DataTabs from 'modules/DataTabs/DataTabs';
+import TeamMonthly from 'modules/TeamMonthly/TeamMonthly';
+import Team from 'modules/Team/Team';
+import Donor from 'modules/Donor/Donor';
+import Os from 'modules/Os/Os';
 
 const NoMatch = () => {
   const location = useLocation();
@@ -25,16 +28,16 @@ const Routes = () => (
       <Redirect to="/team-monthly" />
     </Route>
     <Route path="/team-monthly">
-      <DataTabs />
+      <TeamMonthly />
     </Route>
     <Route path="/team">
-      <DataTabs />
+      <Team />
     </Route>
     <Route path="/donor">
-      <DataTabs />
+      <Donor />
     </Route>
     <Route path="/os">
-      <DataTabs />
+      <Os />
     </Route>
     <Route path="*">
       <NoMatch />

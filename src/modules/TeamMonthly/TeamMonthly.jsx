@@ -1,23 +1,18 @@
 import {
-  Table, Statistic, Space, Tabs, Typography,
+  Statistic, Space, Typography,
 } from 'antd';
+import DataTable from 'elements/DataTable/DataTable';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
-import {
-  getDonors, getTeams, getTeamsMonthly, getOs,
-} from 'store/stats/actions';
+import { getTeamsMonthly } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const { Text } = Typography;
-const { TabPane } = Tabs;
-const DataTabs = () => {
+const TeamMonthly = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTeamsMonthly({}));
-    dispatch(getTeams({}));
-    dispatch(getDonors({}));
-    dispatch(getOs({}));
   }, []);
 
   const stats = useSelector((state) => state.stats);
@@ -97,39 +92,12 @@ const DataTabs = () => {
   ];
 
   return (
-    <>
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="Team Monthly" key="1">
-          <Table
-            columns={columns}
-            dataSource={stats?.teamsMonthly?.results}
-            pagination={{ defaultPageSize: 100 }}
-          />
-        </TabPane>
-        <TabPane tab="Team" key="2">
-          <Table
-            columns={columns}
-            dataSource={stats?.teams?.results}
-            pagination={{ defaultPageSize: 100 }}
-          />
-        </TabPane>
-        <TabPane tab="Donor" key="3">
-          <Table
-            columns={columns}
-            dataSource={stats?.donors?.results}
-            pagination={{ defaultPageSize: 100 }}
-          />
-        </TabPane>
-        {/* <TabPane tab="Os" key="4">
-          <Table
-            columns={columns}
-            dataSource={stats?.os}
-            pagination={{ defaultPageSize: 100 }}
-          />
-        </TabPane> */}
-      </Tabs>
-    </>
+    <DataTable
+      columns={columns}
+      dataSource={stats?.teamsMonthly?.results}
+      pagination={{ defaultPageSize: 100 }}
+    />
   );
 };
 
-export default DataTabs;
+export default TeamMonthly;

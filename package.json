@@ -41,6 +41,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.8.2",
     "customize-cra": "^1.0.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-color": "^2.19.3",
     "react-css-theme-switcher": "^0.1.6",
