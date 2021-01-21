@@ -4,7 +4,7 @@ import {
 import DataTable from 'elements/DataTable/DataTable';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
-import { getTeamsMonthly } from 'store/stats/actions';
+import { getTeamMonthly } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const { Text } = Typography;
@@ -12,7 +12,7 @@ const TeamMonthly = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTeamsMonthly({}));
+    dispatch(getTeamMonthly({}));
   }, []);
 
   const stats = useSelector((state) => state.stats);
@@ -94,7 +94,7 @@ const TeamMonthly = () => {
   return (
     <DataTable
       columns={columns}
-      dataSource={stats?.teamsMonthly?.results}
+      dataSource={stats?.teamsMonthly}
       pagination={{ defaultPageSize: 100 }}
     />
   );

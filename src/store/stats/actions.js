@@ -2,50 +2,66 @@ import slice from 'store/stats/slice';
 import fetch from 'utils/fetch';
 
 const statsHost = process.env.statsHost || '/stats';
-const apiHost = process.env.apiHost || '/api';
+const apiHost = process.env.apiHost || 'https://api2.foldingathome.org';
+const formatList = (list) => {
+  const kvList = [];
+  let keys;
+  list?.forEach((item, i) => {
+    if (i === 0) {
+      keys = item;
+    } else {
+      const listItem = {};
+      keys.forEach((key, j) => {
+        listItem[key] = item?.[j];
+      });
+      kvList.push(listItem);
+    }
+  });
+  return kvList;
+};
 
 // Actions
 const {
-  donors,
-  teams,
-  teamsMonthly,
+  donor,
+  team,
+  teamMonthly,
   os,
 } = slice.actions;
-export const getTeamsMonthly = ({
+export const getTeamMonthly = ({
   teamId, teamName, teamNameSearchType, year, month,
 }) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${statsHost}/api/teams-monthly`, {
+    const res = await fetch.get(`${apiHost}/team/monthly?month=7&year=2019`, {
       name: teamName,
       search_type: teamNameSearchType,
       team: teamId,
       month,
       year,
     });
-    dispatch(teamsMonthly(res));
+    dispatch(teamMonthly(formatList(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
   }
 };
 
-export const getTeams = ({
+export const getTeam = ({
   teamId, teamName, teamNameSearchType,
 }) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${statsHost}/api/teams`, {
+    const res = await fetch.get(`${apiHost}/team`, {
       name: teamName,
       search_type: teamNameSearchType,
       team: teamId,
     });
-    dispatch(teams(res));
+    dispatch(team(formatList(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
   }
 };
 
-export const getDonors = ({
+export const getDonor = ({
   teamId, donorName, donorNameSearchType,
 }) => async (dispatch) => {
   try {
@@ -54,7 +70,7 @@ export const getDonors = ({
       search_type: donorNameSearchType,
       team: teamId,
     });
-    dispatch(donors(res));
+    dispatch(donor(res));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
@@ -63,24 +79,8 @@ export const getDonors = ({
 
 export const getOs = () => async (dispatch) => {
   try {
-    const formatOsList = (list) => {
-      const kvList = [];
-      let keys;
-      list?.forEach((item, i) => {
-        if (i === 0) {
-          keys = item;
-        } else {
-          const listItem = {};
-          keys.forEach((key, j) => {
-            listItem[key] = item?.[j];
-          });
-          kvList.push(listItem);
-        }
-      });
-      return kvList;
-    };
     const res = await fetch.get(`${apiHost}/os`);
-    dispatch(os(formatOsList(res)));
+    dispatch(os(formatList(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

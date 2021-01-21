@@ -1,13 +1,8 @@
-import {
-  Statistic, Space, Typography,
-} from 'antd';
 import DataTable from 'elements/DataTable/DataTable';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
 import { getOs } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const { Text } = Typography;
 const Os = () => {
   const dispatch = useDispatch();
 
@@ -18,76 +13,44 @@ const Os = () => {
   const stats = useSelector((state) => state.stats);
   const columns = [
     {
-      title: 'Rank',
-      dataIndex: 'rank',
-      key: 'rank',
-      defaultSortOrder: 'ascend',
-      render: (text, record) => (
-        <Space direction="horizontal">
-          <Text>{ text }</Text>
-          { record.prev_rank && (
-          <Text style={{ fontSize: '0.8rem' }} disabled>
-            / Prev:
-            { record.prev_rank }
-          </Text>
-          ) }
-        </Space>
-      ),
-      sorter: (a, b) => a.rank - b.rank,
+      title: 'OS',
+      dataIndex: 'OS',
+      key: 'OS',
+      sorter: (a, b) => a.OS.localeCompare(b.OS),
     },
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      sorter: (a, b) => a.name.localeCompare(b.name),
-    },
-    {
-      title: 'Credit',
-      dataIndex: 'credit',
-      key: 'credit',
+      title: 'AMD GPUs',
+      dataIndex: 'AMD GPUs',
+      key: 'AMD GPUs',
       align: 'right',
       render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-      sorter: (a, b) => a.credit - b.credit,
+      sorter: (a, b) => a['AMD GPUs'] - b['AMD GPUs'],
     },
     {
-      title: 'WUs',
-      dataIndex: 'wus',
-      key: 'wus',
+      title: 'NVidia GPUs',
+      dataIndex: 'NVidia GPUs',
+      key: 'NVidia GPUs',
       align: 'right',
       render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-      sorter: (a, b) => a.wus - b.wus,
+      sorter: (a, b) => a['NVidia GPUs'] - b['NVidia GPUs'],
     },
     {
-      title: 'Team',
-      dataIndex: 'team',
-      key: 'team',
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      title: 'CPUs',
+      dataIndex: 'CPUs',
+      key: 'CPUs',
+      sorter: (a, b) => a.CPUs.localeCompare(b.CPUs),
     },
     {
-      title: 'Change',
-      key: 'change',
-      render: (text, record) => {
-        if (record.prev_rank) {
-          const change = parseInt(record.prev_rank - record.rank, 10) || 0;
-          let color; let
-            arrow;
-          if (change !== 0) {
-            color = change < 0 ? '#cf1322' : '#3f8600';
-            arrow = change < 0 ? <ArrowDownOutlined /> : <ArrowUpOutlined />;
-          }
-          return (
-            <Statistic
-              value={change}
-              valueStyle={{ color }}
-              prefix={arrow}
-            />
-          );
-        }
-        return null;
-      },
-      sorter: (a, b) => (
-        (parseInt(b.prev_rank - b.rank, 10) || 0) - (parseInt(a.prev_rank - a.rank, 10) || 0)
-      ),
+      title: 'TFLOPS',
+      dataIndex: 'TFLOPS',
+      key: 'TFLOPS',
+      sorter: (a, b) => a.TFLOPS.localeCompare(b.CPTFLOPSUs),
+    },
+    {
+      title: 'x86 TFLOPS',
+      dataIndex: 'x86 TFLOPS',
+      key: 'x86 TFLOPS',
+      sorter: (a, b) => a['x86 TFLOPS'].localeCompare(b['x86 TFLOPS']),
     },
   ];
 
