@@ -2,6 +2,7 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getOs } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchForm from 'modules/Os/SearchForm';
 
 const Os = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Os = () => {
       dataIndex: 'AMD GPUs',
       key: 'AMD GPUs',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a['AMD GPUs'] - b['AMD GPUs'],
     },
     {
@@ -31,35 +32,44 @@ const Os = () => {
       dataIndex: 'NVidia GPUs',
       key: 'NVidia GPUs',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a['NVidia GPUs'] - b['NVidia GPUs'],
     },
     {
       title: 'CPUs',
       dataIndex: 'CPUs',
       key: 'CPUs',
-      sorter: (a, b) => a.CPUs.localeCompare(b.CPUs),
+      align: 'right',
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      sorter: (a, b) => a.CPUs - b.CPUs,
     },
     {
       title: 'TFLOPS',
       dataIndex: 'TFLOPS',
       key: 'TFLOPS',
-      sorter: (a, b) => a.TFLOPS.localeCompare(b.CPTFLOPSUs),
+      align: 'right',
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      sorter: (a, b) => a.TFLOPS - b.CPTFLOPSUs,
     },
     {
       title: 'x86 TFLOPS',
       dataIndex: 'x86 TFLOPS',
       key: 'x86 TFLOPS',
-      sorter: (a, b) => a['x86 TFLOPS'].localeCompare(b['x86 TFLOPS']),
+      align: 'right',
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      sorter: (a, b) => a['x86 TFLOPS'] - b['x86 TFLOPS'],
     },
   ];
 
   return (
-    <DataTable
-      columns={columns}
-      dataSource={stats?.os}
-      pagination={{ defaultPageSize: 100 }}
-    />
+    <>
+      <SearchForm />
+      <DataTable
+        columns={columns}
+        dataSource={stats?.os}
+        pagination={{ defaultPageSize: 100 }}
+      />
+    </>
   );
 };
 

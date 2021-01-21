@@ -5,6 +5,7 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getTeam } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchForm from 'modules/Team/SearchForm';
 
 const { Text } = Typography;
 const Team = () => {
@@ -16,14 +17,6 @@ const Team = () => {
 
   const stats = useSelector((state) => state.stats);
   const columns = [
-    // id: 0
-    // name: "Default (No team specified)"
-    // founder: "csnow"
-    // url: "https://foldingathome.org/"
-    // logo: "https://foldingathome.org/logo.png"
-    // score: 2948502760133
-    // wus: 293045343
-    // rank: 1
     {
       title: 'Rank',
       dataIndex: 'rank',
@@ -52,15 +45,15 @@ const Team = () => {
       title: 'Founder',
       dataIndex: 'founder',
       key: 'founder',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-      sorter: (a, b) => a.credit - b.credit,
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      sorter: (a, b) => a.founder.localeCompare(b.founder),
     },
     {
       title: 'Score',
       dataIndex: 'score',
       key: 'score',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },
     {
@@ -68,17 +61,20 @@ const Team = () => {
       dataIndex: 'wus',
       key: 'wus',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },
   ];
 
   return (
-    <DataTable
-      columns={columns}
-      dataSource={stats?.team}
-      pagination={{ defaultPageSize: 100 }}
-    />
+    <>
+      <SearchForm />
+      <DataTable
+        columns={columns}
+        dataSource={stats?.team}
+        pagination={{ defaultPageSize: 100 }}
+      />
+    </>
   );
 };
 

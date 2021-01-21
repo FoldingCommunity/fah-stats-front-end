@@ -2,7 +2,7 @@ import {
   Statistic, Space, Typography,
 } from 'antd';
 import DataTable from 'elements/DataTable/DataTable';
-import SearchForm from 'elements/SearchForm/SearchForm';
+import SearchForm from 'modules/TeamMonthly/SearchForm';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
 import { getTeamMonthly } from 'store/stats/actions';
@@ -47,7 +47,7 @@ const TeamMonthly = () => {
       dataIndex: 'credit',
       key: 'credit',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.credit - b.credit,
     },
     {
@@ -55,14 +55,14 @@ const TeamMonthly = () => {
       dataIndex: 'wus',
       key: 'wus',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },
     {
-      title: 'Team',
+      title: 'Team ID',
       dataIndex: 'team',
       key: 'team',
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.team - b.team,
     },
     {
       title: 'Change',

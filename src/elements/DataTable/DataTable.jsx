@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 const DataTable = ({ columns, dataSource, pagination }) => (
   <Table
+    bordered
+    size="small"
+    sticky
     columns={columns}
     dataSource={dataSource}
     pagination={pagination}

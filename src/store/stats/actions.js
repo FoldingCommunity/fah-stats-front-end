@@ -19,6 +19,17 @@ const formatList = (list) => {
   });
   return kvList;
 };
+const formatResult = (res) => {
+  let kvList = [];
+
+  switch (res.constructor) {
+    case Array: kvList = res; break;
+    case Object: kvList = [res]; break;
+    default:
+  }
+  if (res?.status === 'error') { kvList = []; }
+  return kvList;
+};
 
 // Actions
 const {
@@ -28,10 +39,10 @@ const {
   os,
 } = slice.actions;
 export const getTeamMonthly = ({
-  teamId, teamName, teamNameSearchType, year, month,
+  year, month, teamId, teamName, teamNameSearchType,
 }) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${apiHost}/team/monthly?month=7&year=2019`, {
+    const res = await fetch.get(`${apiHost}/team/monthly`, {
       name: teamName,
       search_type: teamNameSearchType,
       team: teamId,
@@ -46,15 +57,15 @@ export const getTeamMonthly = ({
 };
 
 export const getTeam = ({
-  teamId, teamName, teamNameSearchType,
+  teamName,
 }) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${apiHost}/team`, {
+    const url = (teamName ? `${apiHost}/team/find` : `${apiHost}/team`);
+    const res = await fetch.get(url, {
       name: teamName,
-      search_type: teamNameSearchType,
-      team: teamId,
     });
-    dispatch(team(res));
+
+    dispatch(team(formatResult(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
@@ -70,7 +81,8 @@ export const getDonor = ({
       search_type: donorNameSearchType,
       team: teamId,
     });
-    dispatch(donor(res));
+    const res2 = (res?.results?.constructor === Array ? res : []);
+    dispatch(donor(res2));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

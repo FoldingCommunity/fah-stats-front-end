@@ -5,6 +5,7 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchForm from 'modules/Donor/SearchForm';
 
 const { Text } = Typography;
 const Donor = () => {
@@ -51,7 +52,7 @@ const Donor = () => {
       dataIndex: 'credit',
       key: 'credit',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.credit - b.credit,
     },
     {
@@ -59,23 +60,26 @@ const Donor = () => {
       dataIndex: 'wus',
       key: 'wus',
       align: 'right',
-      render: (text) => text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },
     {
-      title: 'Team',
+      title: 'Team ID',
       dataIndex: 'team',
       key: 'team',
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.team - b.team,
     },
   ];
 
   return (
-    <DataTable
-      columns={columns}
-      dataSource={stats?.donors?.results}
-      pagination={{ defaultPageSize: 100 }}
-    />
+    <>
+      <SearchForm />
+      <DataTable
+        columns={columns}
+        dataSource={stats?.donors?.results}
+        pagination={{ defaultPageSize: 100 }}
+      />
+    </>
   );
 };
 
