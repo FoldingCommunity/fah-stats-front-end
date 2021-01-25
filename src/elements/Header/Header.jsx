@@ -6,9 +6,23 @@ import { NavLink } from 'react-router-dom';
 const styles = {
   header: css`
     padding: 0.5rem 2rem 0.5rem 0;
-    background: #383838 none repeat scroll 0% 0%;
-    box-shadow: #000000 0px 0px 8px 0px;
     vertical-align: bottom;
+    margin: 0 auto;
+  `,
+  logo: css`
+    margin: 0 1rem;
+    font-family: Oswald;
+    > img {
+      margin-right: 1rem;
+      padding-right: 1rem;
+      border-right: 1px solid #fe6215;
+    }
+    > span {
+      font-family: Oswald;
+      font-size: 2rem;
+      color: white;
+      text-transform: uppercase;
+    }
   `,
   link: css`
     display: inline-block;
@@ -30,7 +44,10 @@ const Header = () => (
     css={styles.header}
     title={(
       <NavLink to="/">
-        <img alt="FOLDING@HOME" src="./logo-2.png" height="50" />
+        <span css={styles.logo}>
+          <img alt="FOLDING@HOME" src="./logo-2.png" height="50" />
+          <span>Statistics</span>
+        </span>
       </NavLink>
       )}
     extra={[

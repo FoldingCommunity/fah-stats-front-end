@@ -1,12 +1,28 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:regular,italic,500,700&subset=latin,latin-ext');
 @import '~antd/dist/antd.less';
 // @import '~antd/lib/style/themes/dark.less';
 @import '~antd/lib/style/themes/default.less';
 
 @primary-color: #fe6215; // primary color for all components
 @link-color: #fe6215; // link color
+@font-size-base: 1rem;
+@heading-color: #383838;
+@text-color: #383838;
 
-h1, h2, h3, h4, h5, h6 {
+body, html {
+    background-color: #e7e7e7;
+}
+* {
     font-family: Raleway;
     font-weight: 500;
+}
+h1 {
+    font-family: Oswald;
+    font-weight: 700;
+}
+h2, h3, h4, h5, h6 {
+    font-family: Oswald;
+    font-weight: 400;
+}
+iframe {
+    border: 1px solid #e7e7e7;
 }
