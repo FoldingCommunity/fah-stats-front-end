@@ -1,14 +1,12 @@
 ## Mobile Ready
-- Top Nav
-- Title
-- Table
-- Forms
+- Responsive Top Nav
 
 ## General
-- Missing Fields
 - Rank + Change
-- Team Name + ID
 - i18n
 
 ## Home Page
-- test
+
+## Team Landing Page and Modal
+
+## Donor Landing Page and Modal

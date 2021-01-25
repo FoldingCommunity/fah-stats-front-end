@@ -29,10 +29,9 @@ const styles = {
     display: inline-block;
     font-family: Raleway;
     font-weight: 400;
-    font-size: 1.1rem;
     color: white;
     border-bottom: 2px solid transparent;
-    padding: .5rem 1rem;
+    padding: .5rem;
     transition: border-color .25s ease-in-out;
     &:hover, &.active {
       color: white;

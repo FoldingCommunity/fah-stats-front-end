@@ -2,7 +2,19 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { css } from '@emotion/react';
 
+const styles = {
+  donorNameId: css`
+    display: flex;
+    > span {
+      flex: 1;
+      text-align: right;
+      margin-left: 0.5rem;
+      color: #CCCCCC;
+    }
+  `,
+};
 const Donor = () => {
   const dispatch = useDispatch();
 
@@ -13,15 +25,17 @@ const Donor = () => {
   const stats = useSelector((state) => state.stats);
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: 'Name',
+      title: 'Donor Name',
       dataIndex: 'name',
       key: 'name',
+      render: (text, data) => (
+        <span css={styles.donorNameId}>
+          {text}
+          <span>
+            {data.id}
+          </span>
+        </span>
+      ),
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
