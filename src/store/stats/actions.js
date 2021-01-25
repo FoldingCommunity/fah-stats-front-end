@@ -1,7 +1,6 @@
 import slice from 'store/stats/slice';
 import fetch from 'utils/fetch';
 
-const statsHost = process.env.statsHost || 'https://stats.foldingathome.org';
 const apiHost = process.env.apiHost || 'https://api2.foldingathome.org';
 const formatList = (list) => {
   const kvList = [];
@@ -49,7 +48,7 @@ export const getTeamMonthly = ({
       month,
       year,
     });
-    dispatch(teamMonthly(formatList(res)));
+    dispatch(teamMonthly(formatResult(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
@@ -72,17 +71,10 @@ export const getTeam = ({
   }
 };
 
-export const getDonor = ({
-  teamId, donorName, donorNameSearchType,
-}) => async (dispatch) => {
+export const getDonor = () => async (dispatch) => {
   try {
-    const res = await fetch.get(`${statsHost}/api/donors`, {
-      name: donorName,
-      search_type: donorNameSearchType,
-      team: teamId,
-    });
-    const res2 = (res?.results?.constructor === Array ? res : []);
-    dispatch(donor(res2));
+    const res = await fetch.get(`${apiHost}/user`);
+    dispatch(donor(formatResult(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

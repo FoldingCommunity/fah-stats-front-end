@@ -1,50 +1,41 @@
-import {
-  Space, Typography,
-} from 'antd';
 import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchForm from 'modules/Donor/SearchForm';
+import { css } from '@emotion/react';
 
-const { Text } = Typography;
+const styles = {
+  donorNameId: css`
+    display: flex;
+    > span {
+      flex: 1;
+      text-align: right;
+      margin-left: 0.5rem;
+      color: #CCCCCC;
+    }
+  `,
+};
 const Donor = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDonor({}));
+    dispatch(getDonor());
   }, []);
 
   const stats = useSelector((state) => state.stats);
   const columns = [
     {
-      title: 'Rank',
-      dataIndex: 'rank',
-      key: 'rank',
-      defaultSortOrder: 'ascend',
-      render: (text, record) => (
-        <Space direction="horizontal">
-          <Text>{ text }</Text>
-          { record.prev_rank && (
-          <Text style={{ fontSize: '0.8rem' }} disabled>
-            / Prev:
-            { record.prev_rank }
-          </Text>
-          ) }
-        </Space>
-      ),
-      sorter: (a, b) => a.rank - b.rank,
-    },
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: 'Name',
+      title: 'Donor Name',
       dataIndex: 'name',
       key: 'name',
+      render: (text, data) => (
+        <span css={styles.donorNameId}>
+          {text}
+          <span>
+            {data.id}
+          </span>
+        </span>
+      ),
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
@@ -63,21 +54,15 @@ const Donor = () => {
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },
-    {
-      title: 'Team ID',
-      dataIndex: 'team',
-      key: 'team',
-      sorter: (a, b) => a.team - b.team,
-    },
   ];
 
   return (
     <>
-      <SearchForm />
+      <h1>Donor Statistics</h1>
       <DataTable
         columns={columns}
-        dataSource={stats?.donors?.results}
-        pagination={{ defaultPageSize: 100 }}
+        dataSource={stats?.donors}
+        pagination={{ defaultPageSize: 10 }}
       />
     </>
   );

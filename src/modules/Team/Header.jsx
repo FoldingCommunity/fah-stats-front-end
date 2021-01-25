@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 const styles = {
   container: css`
-    margin: 1rem;
+    margin: 1rem 0;
   `,
   width5: css`
     width: 5rem;
@@ -21,9 +21,6 @@ const styles = {
   `,
   width15: css`
     width: 15rem;
-  `,
-  title: css`
-    margin: 2rem 0;
   `,
   searchInput: css`
     position: relative;
@@ -35,7 +32,7 @@ const styles = {
     cursor: pointer;
   `,
 };
-const SearchForm = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const [teamName, setTeamName] = useState();
   const triggerSearch = () => {
@@ -51,9 +48,6 @@ const SearchForm = () => {
       css={styles.container}
       onFinish={triggerSearch}
     >
-      <h1 css={styles.title}>
-        <span>Team Statistics</span>
-      </h1>
       <div>
         <span css={styles.searchInput}>
           <Input
@@ -79,4 +73,4 @@ const SearchForm = () => {
   );
 };
 
-export default SearchForm;
+export default Header;

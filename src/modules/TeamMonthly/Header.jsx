@@ -19,25 +19,16 @@ const YEARS = () => {
 };
 const styles = {
   container: css`
-    margin: 1rem;
-  `,
-  titleSelect: css`
-    font-size: 1.6rem;
-  `,
-  width5: css`
-    width: 5rem;
+    margin: 1rem 0;
   `,
   width10: css`
     width: 10rem;
   `,
-  width15: css`
-    width: 15rem;
-  `,
-  title: css`
-    margin: 2rem 0;
+  width12: css`
+    width: 12rem;
   `,
 };
-const SearchForm = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const [year, setYear] = useState(CURRENT_YEAR);
   const [month, setMonth] = useState(CURRENT_MONTH);
@@ -50,25 +41,22 @@ const SearchForm = () => {
     <Form
       css={styles.container}
     >
-      <h1 css={styles.title}>
-        <span>Team Statistics for </span>
-        <Select
-          css={[styles.width10, styles.titleSelect]}
-          value={month}
-          onChange={setMonth}
-        >
-          { MONTHS.map((m, i) => <Select.Option value={(i + 1)}>{m}</Select.Option>) }
-        </Select>
-        <Select
-          css={[styles.width10, styles.titleSelect]}
-          value={year}
-          onChange={setYear}
-        >
-          { YEARS().map((y) => <Select.Option value={y}>{y}</Select.Option>) }
-        </Select>
-      </h1>
+      <Select
+        css={styles.width12}
+        value={month}
+        onChange={setMonth}
+      >
+        { MONTHS.map((m, i) => <Select.Option value={(i + 1)}>{m}</Select.Option>) }
+      </Select>
+      <Select
+        css={styles.width10}
+        value={year}
+        onChange={setYear}
+      >
+        { YEARS().map((y) => <Select.Option value={y}>{y}</Select.Option>) }
+      </Select>
     </Form>
   );
 };
 
-export default SearchForm;
+export default Header;
