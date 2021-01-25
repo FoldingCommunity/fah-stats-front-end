@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { css } from '@emotion/react';
+import Header from 'modules/Donor/Header';
 
 const styles = {
   donorNameId: css`
@@ -19,7 +20,7 @@ const Donor = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDonor());
+    dispatch(getDonor({}));
   }, []);
 
   const stats = useSelector((state) => state.stats);
@@ -59,6 +60,7 @@ const Donor = () => {
   return (
     <>
       <h1>Donor Statistics</h1>
+      <Header />
       <DataTable
         columns={columns}
         dataSource={stats?.donors}
