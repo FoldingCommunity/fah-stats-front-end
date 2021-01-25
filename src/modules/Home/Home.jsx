@@ -4,20 +4,17 @@ import { Tabs } from 'antd';
 import PropTypes from 'prop-types';
 
 const { TabPane } = Tabs;
-const styles = {
-  container: css`
-    margin: 2rem 1rem;
-  `,
+const myeStyles = {
   mye: css`
-    line-height: 3.75rem;
+  line-height: 3.75rem;
+`,
+  ye: css`
+    display: block;
   `,
   maximize: css`
     font-family: Oswald;
     font-size: 5rem;
     font-weight: 700;
-    display: block;
-  `,
-  ye: css`
     display: block;
   `,
   your: css`
@@ -32,9 +29,18 @@ const styles = {
     font-size: 3rem;
     font-weight: 700;
   `,
+};
+const styles = {
+  container: css`
+    margin-top: 1rem;
+  `,
   flex: css`
     display: flex;
     flex-wrap: wrap;
+  `,
+  intro: css`
+    width: 25rem;
+    padding-right: 1rem;
   `,
   tabbedContent: css`
     flex-grow: 1;
@@ -56,7 +62,7 @@ Iframe.propTypes = {
 const Home = () => (
   <div css={styles.container}>
     <div css={styles.flex}>
-      <div style={{ width: '25rem', padding: '1rem' }}>
+      <div css={styles.intro}>
         <p>
           On this page you will find access to statistics for individuals
           and teams who have joined together to earn points and compete
@@ -65,11 +71,11 @@ const Home = () => (
           and we drive the technology forward by reporting bugs and making
           suggestions about how to improve the software.
         </p>
-        <h2 css={styles.mye}>
-          <span css={styles.maximize}>MAXIMIZE</span>
-          <span css={styles.ye}>
-            <span css={styles.your}>your</span>
-            <span css={styles.effort}>EFFORT</span>
+        <h2 css={myeStyles.mye}>
+          <span css={myeStyles.maximize}>MAXIMIZE</span>
+          <span css={myeStyles.ye}>
+            <span css={myeStyles.your}>your</span>
+            <span css={myeStyles.effort}>EFFORT</span>
           </span>
         </h2>
         <h2>Set up your team</h2>

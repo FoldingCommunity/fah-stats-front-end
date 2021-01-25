@@ -19,19 +19,13 @@ const YEARS = () => {
 };
 const styles = {
   container: css`
-    margin: 1rem;
-  `,
-  titleSelect: css`
-    font-size: 1.4rem;
+    margin: 1rem 0;
   `,
   width10: css`
     width: 10rem;
   `,
   width12: css`
     width: 12rem;
-  `,
-  title: css`
-    margin: 2rem 0 1rem;
   `,
 };
 const Header = () => {
@@ -44,27 +38,24 @@ const Header = () => {
   }, [month, year]);
 
   return (
-    <>
-      <Form
-        css={styles.container}
+    <Form
+      css={styles.container}
+    >
+      <Select
+        css={styles.width12}
+        value={month}
+        onChange={setMonth}
       >
-        <h1 css={styles.title}>Team Monthly Statistics</h1>
-        <Select
-          css={[styles.width12, styles.titleSelect]}
-          value={month}
-          onChange={setMonth}
-        >
-          { MONTHS.map((m, i) => <Select.Option value={(i + 1)}>{m}</Select.Option>) }
-        </Select>
-        <Select
-          css={[styles.width10, styles.titleSelect]}
-          value={year}
-          onChange={setYear}
-        >
-          { YEARS().map((y) => <Select.Option value={y}>{y}</Select.Option>) }
-        </Select>
-      </Form>
-    </>
+        { MONTHS.map((m, i) => <Select.Option value={(i + 1)}>{m}</Select.Option>) }
+      </Select>
+      <Select
+        css={styles.width10}
+        value={year}
+        onChange={setYear}
+      >
+        { YEARS().map((y) => <Select.Option value={y}>{y}</Select.Option>) }
+      </Select>
+    </Form>
   );
 };
 

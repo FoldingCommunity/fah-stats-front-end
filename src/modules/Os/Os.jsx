@@ -2,7 +2,6 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getOs } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from 'modules/Os/Header';
 
 const Os = () => {
   const dispatch = useDispatch();
@@ -63,7 +62,7 @@ const Os = () => {
 
   return (
     <>
-      <Header />
+      <h1>OS Statistics</h1>
       <DataTable
         columns={columns}
         dataSource={stats?.os}

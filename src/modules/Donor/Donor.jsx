@@ -2,7 +2,6 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from 'modules/Donor/Header';
 
 const Donor = () => {
   const dispatch = useDispatch();
@@ -45,7 +44,7 @@ const Donor = () => {
 
   return (
     <>
-      <Header />
+      <h1>Donor Statistics</h1>
       <DataTable
         columns={columns}
         dataSource={stats?.donors}

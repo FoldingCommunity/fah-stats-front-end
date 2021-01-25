@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 const styles = {
   container: css`
-    margin: 1rem;
+    margin: 1rem 0;
   `,
   width5: css`
     width: 5rem;
@@ -21,9 +21,6 @@ const styles = {
   `,
   width15: css`
     width: 15rem;
-  `,
-  title: css`
-    margin: 2rem 0 1rem;
   `,
   searchInput: css`
     position: relative;
@@ -51,7 +48,6 @@ const Header = () => {
       css={styles.container}
       onFinish={triggerSearch}
     >
-      <h1 css={styles.title}>Team Statistics</h1>
       <div>
         <span css={styles.searchInput}>
           <Input

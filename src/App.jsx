@@ -20,6 +20,12 @@ const styles = {
       width: 1170px;
     }
   `,
+  containerHeader: css`
+    padding: 0 1rem;
+  `,
+  containerBody: css`
+    padding: 1rem;
+  `,
   header: css`
     padding: 0;
     background: #383838 none repeat scroll 0% 0%;
@@ -30,11 +36,9 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div css={styles.header}>
-        <div css={styles.container}><Header /></div>
+        <div css={[styles.container, styles.containerHeader]}><Header /></div>
       </div>
-      <div css={styles.container}>
-        <Routes />
-      </div>
+      <div css={[styles.container, styles.containerBody]}><Routes /></div>
     </BrowserRouter>
   </Provider>
 );

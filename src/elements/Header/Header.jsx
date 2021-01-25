@@ -10,7 +10,7 @@ const styles = {
     margin: 0 auto;
   `,
   logo: css`
-    margin: 0 1rem;
+    margin: 0;
     font-family: Oswald;
     > img {
       margin-right: 1rem;
@@ -22,6 +22,7 @@ const styles = {
       font-size: 2rem;
       color: white;
       text-transform: uppercase;
+      vertical-align: middle;
     }
   `,
   link: css`
