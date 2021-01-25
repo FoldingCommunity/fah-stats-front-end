@@ -5,6 +5,10 @@ const slice = createSlice({
   name: 'stats',
   initialState: {},
   reducers: {
+    myself: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.myself = action.payload;
+    },
     donor: (state, action) => {
       // eslint-disable-next-line no-param-reassign
       state.donors = action.payload;
