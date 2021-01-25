@@ -32,6 +32,7 @@ const formatResult = (res) => {
 
 // Actions
 const {
+  myself,
   donor,
   team,
   teamMonthly,
@@ -71,9 +72,14 @@ export const getTeam = ({
   }
 };
 
-export const getDonor = () => async (dispatch) => {
+export const getDonor = ({
+  donorName,
+}) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${apiHost}/user`);
+    const url = (donorName ? `${apiHost}/user/find` : `${apiHost}/user`);
+    const res = await fetch.get(url, {
+      name: donorName,
+    });
     dispatch(donor(formatResult(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -85,6 +91,26 @@ export const getOs = () => async (dispatch) => {
   try {
     const res = await fetch.get(`${apiHost}/os`);
     dispatch(os(formatList(res)));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const getDonorByName = ({
+  donorName,
+}) => async (dispatch) => {
+  if (!donorName) {
+    localStorage.removeItem('donorName');
+    dispatch(myself([]));
+    return;
+  }
+  try {
+    const res = await fetch.get(`${apiHost}/user/find`, {
+      name: donorName,
+    });
+    localStorage.setItem('donorName', donorName);
+    dispatch(myself(formatResult(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

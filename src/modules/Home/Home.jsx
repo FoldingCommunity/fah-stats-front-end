@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { Tabs } from 'antd';
 import PropTypes from 'prop-types';
+import MeAndTeams from 'modules/Home/MeAndTeams';
 
 const { TabPane } = Tabs;
 const myeStyles = {
@@ -88,7 +89,9 @@ const Home = () => (
         <p>If you are interested in setting up a team of your own, you can get started here.</p>
       </div>
       <Tabs type="card" css={styles.tabbedContent}>
-        <TabPane tab="Me & My Team" key="1" />
+        <TabPane tab="Me & My Teams" key="1">
+          <MeAndTeams />
+        </TabPane>
         <TabPane tab="Start a Team" key="2">
           <Iframe title="" src="https://apps.foldingathome.org/team" height="500" width="100%" />
         </TabPane>
