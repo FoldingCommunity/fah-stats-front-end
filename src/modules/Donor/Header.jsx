@@ -9,14 +9,10 @@ const styles = {
     margin: 2rem 0;
   `,
 };
-const SearchForm = () => (
-  <div
-    css={styles.container}
-  >
-    <h1 css={styles.title}>
-      <span>Donor Statistics</span>
-    </h1>
+const Header = () => (
+  <div css={styles.container}>
+    <h1 css={styles.title}>Donor Statistics</h1>
   </div>
 );
 
-export default SearchForm;
+export default Header;

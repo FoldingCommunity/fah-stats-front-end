@@ -2,7 +2,7 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getTeam } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchForm from 'modules/Team/SearchForm';
+import Header from 'modules/Team/Header';
 
 const Team = () => {
   const dispatch = useDispatch();
@@ -38,11 +38,11 @@ const Team = () => {
 
   return (
     <>
-      <SearchForm />
+      <Header />
       <DataTable
         columns={columns}
         dataSource={stats?.team}
-        pagination={{ defaultPageSize: 100 }}
+        pagination={{ defaultPageSize: 10 }}
       />
     </>
   );

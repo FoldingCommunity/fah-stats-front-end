@@ -22,22 +22,19 @@ const styles = {
     margin: 1rem;
   `,
   titleSelect: css`
-    font-size: 1.6rem;
-  `,
-  width5: css`
-    width: 5rem;
+    font-size: 1.4rem;
   `,
   width10: css`
     width: 10rem;
   `,
-  width15: css`
-    width: 15rem;
+  width12: css`
+    width: 12rem;
   `,
   title: css`
-    margin: 2rem 0;
+    margin: 2rem 0 1rem;
   `,
 };
-const SearchForm = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const [year, setYear] = useState(CURRENT_YEAR);
   const [month, setMonth] = useState(CURRENT_MONTH);
@@ -47,13 +44,13 @@ const SearchForm = () => {
   }, [month, year]);
 
   return (
-    <Form
-      css={styles.container}
-    >
-      <h1 css={styles.title}>
-        <span>Team Statistics for </span>
+    <>
+      <Form
+        css={styles.container}
+      >
+        <h1 css={styles.title}>Team Monthly Statistics</h1>
         <Select
-          css={[styles.width10, styles.titleSelect]}
+          css={[styles.width12, styles.titleSelect]}
           value={month}
           onChange={setMonth}
         >
@@ -66,9 +63,9 @@ const SearchForm = () => {
         >
           { YEARS().map((y) => <Select.Option value={y}>{y}</Select.Option>) }
         </Select>
-      </h1>
-    </Form>
+      </Form>
+    </>
   );
 };
 
-export default SearchForm;
+export default Header;

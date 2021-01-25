@@ -2,7 +2,7 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchForm from 'modules/Donor/SearchForm';
+import Header from 'modules/Donor/Header';
 
 const Donor = () => {
   const dispatch = useDispatch();
@@ -45,11 +45,11 @@ const Donor = () => {
 
   return (
     <>
-      <SearchForm />
+      <Header />
       <DataTable
         columns={columns}
         dataSource={stats?.donors}
-        pagination={{ defaultPageSize: 100 }}
+        pagination={{ defaultPageSize: 10 }}
       />
     </>
   );

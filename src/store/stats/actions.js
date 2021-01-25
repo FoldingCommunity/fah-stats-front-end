@@ -48,7 +48,7 @@ export const getTeamMonthly = ({
       month,
       year,
     });
-    dispatch(teamMonthly(res));
+    dispatch(teamMonthly(formatResult(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

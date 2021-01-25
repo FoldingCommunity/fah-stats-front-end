@@ -1,5 +1,5 @@
 import DataTable from 'elements/DataTable/DataTable';
-import SearchForm from 'modules/TeamMonthly/SearchForm';
+import Header from 'modules/TeamMonthly/Header';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -38,11 +38,11 @@ const TeamMonthly = () => {
 
   return (
     <>
-      <SearchForm />
+      <Header />
       <DataTable
         columns={columns}
         dataSource={stats?.teamMonthly}
-        pagination={{ defaultPageSize: 100 }}
+        pagination={{ defaultPageSize: 10 }}
       />
     </>
   );

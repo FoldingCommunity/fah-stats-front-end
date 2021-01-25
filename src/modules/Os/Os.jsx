@@ -2,7 +2,7 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getOs } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchForm from 'modules/Os/SearchForm';
+import Header from 'modules/Os/Header';
 
 const Os = () => {
   const dispatch = useDispatch();
@@ -63,11 +63,11 @@ const Os = () => {
 
   return (
     <>
-      <SearchForm />
+      <Header />
       <DataTable
         columns={columns}
         dataSource={stats?.os}
-        pagination={{ defaultPageSize: 100 }}
+        pagination={{ defaultPageSize: 10 }}
       />
     </>
   );

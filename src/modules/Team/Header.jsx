@@ -23,7 +23,7 @@ const styles = {
     width: 15rem;
   `,
   title: css`
-    margin: 2rem 0;
+    margin: 2rem 0 1rem;
   `,
   searchInput: css`
     position: relative;
@@ -35,7 +35,7 @@ const styles = {
     cursor: pointer;
   `,
 };
-const SearchForm = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const [teamName, setTeamName] = useState();
   const triggerSearch = () => {
@@ -51,9 +51,7 @@ const SearchForm = () => {
       css={styles.container}
       onFinish={triggerSearch}
     >
-      <h1 css={styles.title}>
-        <span>Team Statistics</span>
-      </h1>
+      <h1 css={styles.title}>Team Statistics</h1>
       <div>
         <span css={styles.searchInput}>
           <Input
@@ -79,4 +77,4 @@ const SearchForm = () => {
   );
 };
 
-export default SearchForm;
+export default Header;
