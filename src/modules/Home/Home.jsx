@@ -35,16 +35,24 @@ const styles = {
   container: css`
     margin-top: 1rem;
   `,
-  flex: css`
+  intro: css`
     display: flex;
     flex-wrap: wrap;
-  `,
-  intro: css`
-    width: 25rem;
-    padding-right: 1rem;
+    > h2 {
+      width: 350px;
+    }
+    > div {
+      flex: 1;
+      vertical-align:top;
+    }
   `,
   tabbedContent: css`
-    flex-grow: 1;
+    .ant-tabs-nav {
+      margin: 0;
+      padding: 0;
+    }
+  `,
+  tabPaneContent: css`
     background-color: white;
     padding: 1rem;
   `,
@@ -62,44 +70,41 @@ Iframe.propTypes = {
 };
 const Home = () => (
   <div css={styles.container}>
-    <div css={styles.flex}>
-      <div css={styles.intro}>
-        <p>
-          On this page you will find access to statistics for individuals
-          and teams who have joined together to earn points and compete
-          with other teams. Some of us are quite intense in our approach
-          to folding. We have team websites, we supe up our computers,
-          and we drive the technology forward by reporting bugs and making
-          suggestions about how to improve the software.
-        </p>
-        <h2 css={myeStyles.mye}>
-          <span css={myeStyles.maximize}>MAXIMIZE</span>
-          <span css={myeStyles.ye}>
-            <span css={myeStyles.your}>your</span>
-            <span css={myeStyles.effort}>EFFORT</span>
-          </span>
-        </h2>
+    <p>
+      On this page you will find access to statistics for individuals
+      and teams who have joined together to earn points and compete
+      with other teams. Some of us are quite intense in our approach
+      to folding. We have team websites, we supe up our computers,
+      and we drive the technology forward by reporting bugs and making
+      suggestions about how to improve the software.
+    </p>
+    <div css={styles.intro}>
+      <h2 css={myeStyles.mye}>
+        <span css={myeStyles.maximize}>MAXIMIZE</span>
+        <span css={myeStyles.ye}>
+          <span css={myeStyles.your}>your</span>
+          <span css={myeStyles.effort}>EFFORT</span>
+        </span>
+      </h2>
+      <div>
         <h2>Set up your team</h2>
         <p>
           One of the best ways to help Folding@home is by recruiting
           your friends and family. Start by sharing our project with
           them. Then join a team or even start your own team. The more
           points your team earns, the closer we come to finding cures.
+          If you are interested in setting up a team of your own, you can get started here.
         </p>
-        <p>If you are interested in setting up a team of your own, you can get started here.</p>
       </div>
-      <Tabs type="card" css={styles.tabbedContent}>
-        <TabPane tab="Me & My Teams" key="1">
-          <MeAndTeams />
-        </TabPane>
-        <TabPane tab="Start a Team" key="2">
-          <Iframe title="" src="https://apps.foldingathome.org/team" height="500" width="100%" />
-        </TabPane>
-        <TabPane tab="Modify my Team" key="3">
-          <Iframe title="" src="https://apps.foldingathome.org/team" height="500" width="100%" />
-        </TabPane>
-      </Tabs>
     </div>
+    <Tabs type="card" css={styles.tabbedContent}>
+      <TabPane tab="Me & My Teams" key="1" css={styles.tabPaneContent}>
+        <MeAndTeams />
+      </TabPane>
+      <TabPane tab="Create / Modify a Team" key="2" css={styles.tabPaneContent}>
+        <Iframe title="" src="https://apps.foldingathome.org/team" height="400" width="100%" />
+      </TabPane>
+    </Tabs>
   </div>
 );
 

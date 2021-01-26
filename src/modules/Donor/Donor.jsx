@@ -4,6 +4,7 @@ import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { css } from '@emotion/react';
 import Header from 'modules/Donor/Header';
+import { PrettyCount } from 'utils/format';
 
 const styles = {
   dNameIdContainer: css`
@@ -50,7 +51,7 @@ const Donor = () => {
       key: 'credit',
       align: 'right',
       width: 200,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.credit - b.credit,
     },
     {
@@ -59,7 +60,7 @@ const Donor = () => {
       key: 'wus',
       align: 'right',
       width: 200,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.wus - b.wus,
     },
   ];

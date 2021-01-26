@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import {
-  Form,
-  Input,
-  Button,
-} from 'antd';
+import { Form, Input, Button } from 'antd';
 import { css } from '@emotion/react';
 import { getDonorByName } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import DonorProfile from 'modules/Donor/DonorProfile';
 
 const styles = {
   container: css`
@@ -36,6 +33,9 @@ const styles = {
       margin-bottom: 1rem;
     }
   `,
+  CertificateLink: css`
+    margin-left: 0.5rem;
+  `,
 };
 const MeAndTeams = () => {
   const dispatch = useDispatch();
@@ -52,21 +52,7 @@ const MeAndTeams = () => {
 
   return myself ? (
     <>
-      <h2>{`${myself.name} (${myself.id})`}</h2>
-      <div>{`Score: ${myself.score}`}</div>
-      <div>{`Rank: ${myself.rank || '-'}`}</div>
-      <div>{`WUs: ${myself.wus}`}</div>
-      <br />
-      <h2>Teams</h2>
-      <div css={styles.teams}>
-        {myself?.teams && myself.teams.map((team) => (
-          <div>
-            <h4>{`${team.name} (${team.team})`}</h4>
-            <div>{`Score: ${team.score}`}</div>
-            <div>{`WUs: ${team.wus}`}</div>
-          </div>
-        ))}
-      </div>
+      <DonorProfile donor={myself} />
       <br />
       <Button type="primary" onClick={clearSearch}>Change Donor Name</Button>
     </>
@@ -78,7 +64,7 @@ const MeAndTeams = () => {
       <div>
         <span css={styles.searchInput}>
           <Input
-            placeholder="Search Donor Name"
+            placeholder="Search my Donor Name"
             type="text"
             value={donorName}
             onChange={(event) => setDonorName(event.target.value)}
@@ -93,7 +79,7 @@ const MeAndTeams = () => {
         </span>
         <Button type="primary" htmlType="submit">
           <SearchOutlined />
-          Search Donor Name
+          Search my Donor Name
         </Button>
       </div>
     </Form>

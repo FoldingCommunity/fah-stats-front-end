@@ -2,6 +2,7 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getOs } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { PrettyCount } from 'utils/format';
 
 const Os = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Os = () => {
       key: 'AMD GPUs',
       align: 'right',
       width: 100,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a['AMD GPUs'] - b['AMD GPUs'],
     },
     {
@@ -35,7 +36,7 @@ const Os = () => {
       key: 'NVidia GPUs',
       align: 'right',
       width: 100,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a['NVidia GPUs'] - b['NVidia GPUs'],
     },
     {
@@ -44,7 +45,7 @@ const Os = () => {
       key: 'CPUs',
       align: 'right',
       width: 100,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.CPUs - b.CPUs,
     },
     {
@@ -53,7 +54,7 @@ const Os = () => {
       key: 'TFLOPS',
       align: 'right',
       width: 100,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.TFLOPS - b.CPTFLOPSUs,
     },
     {
@@ -62,7 +63,7 @@ const Os = () => {
       key: 'x86 TFLOPS',
       align: 'right',
       width: 100,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a['x86 TFLOPS'] - b['x86 TFLOPS'],
     },
   ];

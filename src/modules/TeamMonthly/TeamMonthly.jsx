@@ -3,6 +3,7 @@ import Header from 'modules/TeamMonthly/Header';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { css } from '@emotion/react';
+import { PrettyCount } from 'utils/format';
 
 const styles = {
   dNameIdContainer: css`
@@ -43,7 +44,7 @@ const TeamMonthly = () => {
       key: 'credit',
       align: 'right',
       width: 200,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.credit - b.credit,
     },
     {
@@ -52,7 +53,7 @@ const TeamMonthly = () => {
       key: 'wus',
       align: 'right',
       width: 200,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.wus - b.wus,
     },
   ];

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from 'modules/Team/Header';
 import { css } from '@emotion/react';
 import { Tooltip } from 'antd';
+import { PrettyCount } from 'utils/format';
 
 const DEFAULT_LOGO = '/logo.png';
 const styles = {
@@ -79,7 +80,7 @@ const Team = () => {
       key: 'credit',
       align: 'right',
       width: 200,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.credit - b.credit,
     },
     {
@@ -88,7 +89,7 @@ const Team = () => {
       key: 'wus',
       align: 'right',
       width: 200,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.wus - b.wus,
     },
     {
@@ -96,7 +97,7 @@ const Team = () => {
       dataIndex: 'founder',
       key: 'founder',
       width: 200,
-      render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      render: (count) => <PrettyCount count={count} />,
       sorter: (a, b) => a.founder.localeCompare(b.founder),
     },
   ];
