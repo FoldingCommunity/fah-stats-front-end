@@ -100,17 +100,31 @@ export const getOs = () => async (dispatch) => {
 export const getDonorByName = ({
   donorName,
 }) => async (dispatch) => {
-  if (!donorName) {
-    localStorage.removeItem('donorName');
+  const computedDonorName = donorName || localStorage.getItem('donorName');
+
+  if (!computedDonorName) {
     dispatch(myself([]));
     return;
   }
   try {
     const res = await fetch.get(`${apiHost}/user/find`, {
-      name: donorName,
+      name: computedDonorName,
     });
-    localStorage.setItem('donorName', donorName);
-    dispatch(myself(formatResult(res)));
+    const formattedRes = formatResult(res);
+    if (formattedRes.length) {
+      localStorage.setItem('donorName', computedDonorName);
+    }
+    dispatch(myself(formattedRes));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const clearDonorByName = () => async (dispatch) => {
+  try {
+    localStorage.removeItem('donorName');
+    dispatch(myself());
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

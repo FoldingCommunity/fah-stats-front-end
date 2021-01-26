@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
 import { css } from '@emotion/react';
-import { getDonorByName } from 'store/stats/actions';
+import { getDonorByName, clearDonorByName } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import DonorProfile from 'modules/Donor/DonorProfile';
 
@@ -40,12 +40,16 @@ const styles = {
 const MeAndTeams = () => {
   const dispatch = useDispatch();
   const [donorName, setDonorName] = useState();
+
+  useEffect(() => {
+    dispatch(getDonorByName({}));
+  }, []);
   const triggerSearch = () => {
     dispatch(getDonorByName({ donorName }));
   };
   const clearSearch = () => {
     setDonorName();
-    dispatch(getDonorByName({}));
+    dispatch(clearDonorByName());
   };
   const stats = useSelector((state) => state.stats);
   const myself = stats?.myself?.[0];
