@@ -1,7 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
-import { Result, Button } from 'antd';
+import { Result } from 'antd';
 
 const styles = {
   container: css`
@@ -24,7 +24,7 @@ const Missing = () => {
             <div css={styles.note}>
               { `Your requested page ${location.pathname} was not found.` }
             </div>
-            <Button type="primary" key="console">Go Home</Button>
+            <Link to="/">Take me back Home</Link>
           </>
         )}
       />
