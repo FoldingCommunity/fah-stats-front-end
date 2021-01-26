@@ -62,7 +62,7 @@ const DonorProfile = ({ donor }) => (
     <br />
     <h2>Teams</h2>
     <div css={styles.teams}>
-      {donor?.teams?.map((team) => (<div><DonorTeamProfile team={team} /></div>))}
+      {donor?.teams?.map((team) => (<div key={team.team}><DonorTeamProfile team={team} /></div>))}
     </div>
     <br />
   </>

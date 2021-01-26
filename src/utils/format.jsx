@@ -30,7 +30,7 @@ export const PrettyCount = ({ count }) => (count?.toLocaleString(
   undefined, { maximumFractionDigits: 0 },
 ) || (<span>{count}</span>));
 PrettyCount.propTypes = {
-  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),,
+  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
 export const CertificateLink = ({ id, text, type }) => (id && text && type && (
