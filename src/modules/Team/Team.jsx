@@ -8,24 +8,29 @@ import { Tooltip } from 'antd';
 
 const DEFAULT_LOGO = '/logo.png';
 const styles = {
-  teamNameId: css`
+  dNameIdContainer: css`
     display: flex;
-    > a img {
-      width: 2rem;
-      height: 2rem;
-      margin-right: 1rem;
-    }
     .ant-skeleton-image {
       width: 2rem;
       height: 2rem;
       margin-right: 1rem;
     }
-    > span {
-      flex: 1;
-      text-align: right;
-      margin-left: 0.5rem;
-      color: #CCCCCC;
-    }
+  `,
+  dName: css`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
+  dId: css`
+    flex: 1;
+    text-align: right;
+    margin-left: 0.5rem;
+    color: #CCCCCC;
+  `,
+  dLogo: css`
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
   `,
 };
 const setupURL = (url) => ((url && !url.includes('http')) ? `https://${url}` : url);
@@ -53,15 +58,17 @@ const Team = () => {
       title: 'Team Name',
       dataIndex: 'name',
       key: 'name',
+      width: 200,
+      fixed: 'left',
       render: (text, data) => (
-        <span css={styles.teamNameId}>
+        <span css={styles.dNameIdContainer}>
           <a target="_blank" rel="noopener noreferrer" href={setupURL(data?.url)}>
             <Tooltip title={setupURL(data?.url)}>
-              <img alt="" src={imageLoad(data)} onError={setDefaultImage} />
+              <img alt="" src={imageLoad(data)} onError={setDefaultImage} css={styles.dLogo} />
             </Tooltip>
           </a>
-          {text}
-          <span>{data.team}</span>
+          <span css={styles.dName}>{text}</span>
+          <span css={styles.dId}>{data.team}</span>
         </span>
       ),
       sorter: (a, b) => a.name.localeCompare(b.name),
@@ -71,6 +78,7 @@ const Team = () => {
       dataIndex: 'credit',
       key: 'credit',
       align: 'right',
+      width: 200,
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.credit - b.credit,
     },
@@ -79,6 +87,7 @@ const Team = () => {
       dataIndex: 'wus',
       key: 'wus',
       align: 'right',
+      width: 200,
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },
@@ -86,6 +95,7 @@ const Team = () => {
       title: 'Founder',
       dataIndex: 'founder',
       key: 'founder',
+      width: 200,
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.founder.localeCompare(b.founder),
     },

@@ -5,14 +5,19 @@ import { useSelector } from 'react-redux';
 import { css } from '@emotion/react';
 
 const styles = {
-  teamNameId: css`
+  dNameIdContainer: css`
     display: flex;
-    > span {
-      flex: 1;
-      text-align: right;
-      margin-left: 0.5rem;
-      color: #CCCCCC;
-    }
+  `,
+  dName: css`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
+  dId: css`
+    flex: 1;
+    text-align: right;
+    margin-left: 0.5rem;
+    color: #CCCCCC;
   `,
 };
 const TeamMonthly = () => {
@@ -22,12 +27,12 @@ const TeamMonthly = () => {
       title: 'Team Name',
       dataIndex: 'name',
       key: 'name',
+      width: 200,
+      fixed: 'left',
       render: (text, data) => (
-        <span css={styles.teamNameId}>
-          {text}
-          <span>
-            {data.team}
-          </span>
+        <span css={styles.dNameIdContainer}>
+          <span css={styles.dName}>{text}</span>
+          <span css={styles.dId}>{data.team}</span>
         </span>
       ),
       sorter: (a, b) => a.name.localeCompare(b.name),
@@ -37,6 +42,7 @@ const TeamMonthly = () => {
       dataIndex: 'credit',
       key: 'credit',
       align: 'right',
+      width: 200,
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.credit - b.credit,
     },
@@ -45,6 +51,7 @@ const TeamMonthly = () => {
       dataIndex: 'wus',
       key: 'wus',
       align: 'right',
+      width: 200,
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },

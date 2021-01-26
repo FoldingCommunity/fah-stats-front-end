@@ -6,14 +6,19 @@ import { css } from '@emotion/react';
 import Header from 'modules/Donor/Header';
 
 const styles = {
-  donorNameId: css`
+  dNameIdContainer: css`
     display: flex;
-    > span {
-      flex: 1;
-      text-align: right;
-      margin-left: 0.5rem;
-      color: #CCCCCC;
-    }
+  `,
+  dName: css`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
+  dId: css`
+    flex: 1;
+    text-align: right;
+    margin-left: 0.5rem;
+    color: #CCCCCC;
   `,
 };
 const Donor = () => {
@@ -29,12 +34,12 @@ const Donor = () => {
       title: 'Donor Name',
       dataIndex: 'name',
       key: 'name',
+      width: 200,
+      fixed: 'left',
       render: (text, data) => (
-        <span css={styles.donorNameId}>
-          {text}
-          <span>
-            {data.id}
-          </span>
+        <span css={styles.dNameIdContainer}>
+          <span css={styles.dName}>{text}</span>
+          <span css={styles.dId}>{data.id}</span>
         </span>
       ),
       sorter: (a, b) => a.name.localeCompare(b.name),
@@ -44,6 +49,7 @@ const Donor = () => {
       dataIndex: 'credit',
       key: 'credit',
       align: 'right',
+      width: 200,
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.credit - b.credit,
     },
@@ -52,6 +58,7 @@ const Donor = () => {
       dataIndex: 'wus',
       key: 'wus',
       align: 'right',
+      width: 200,
       render: (text) => text?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
       sorter: (a, b) => a.wus - b.wus,
     },

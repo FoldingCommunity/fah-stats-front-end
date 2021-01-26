@@ -10,6 +10,7 @@ const DataTable = ({ columns, dataSource, pagination }) => (
     columns={columns}
     dataSource={dataSource}
     pagination={pagination}
+    scroll={{ x: 'fit-content' }}
   />
 );
 
