@@ -1,10 +1,12 @@
 import { Table } from 'antd';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
 
 const DataTable = ({ columns, dataSource, pagination }) => (
   <Table
     bordered
+    rowKey={() => uuid()}
     size="small"
     sticky
     columns={columns}
