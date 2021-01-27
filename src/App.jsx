@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { css } from '@emotion/react';
 import './App.less';
-import Header from 'elements/Header/Header';
+import Header from 'modules/Header/Header';
 import Routes from 'utils/Routes';
 import { BrowserRouter } from 'react-router-dom';
 import store from 'store';

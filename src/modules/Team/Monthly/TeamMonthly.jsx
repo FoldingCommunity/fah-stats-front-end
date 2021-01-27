@@ -1,5 +1,5 @@
 import DataTable from 'elements/DataTable/DataTable';
-import Header from 'modules/TeamMonthly/Header';
+import Header from 'modules/Team/Monthly/Header';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { css } from '@emotion/react';
@@ -60,7 +60,6 @@ const TeamMonthly = () => {
 
   return (
     <>
-      <h1>Team Monthly Statistics</h1>
       <Header />
       <DataTable
         columns={columns}
