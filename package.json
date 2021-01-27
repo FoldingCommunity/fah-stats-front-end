@@ -6,6 +6,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "setup-docs": "cp _config.yml build;cp CNAME build;rm -rf docs;mv build docs",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint-fix": "eslint --ext .js --ext .jsx . --fix",
     "lint-quiet": "eslint --ext .js --ext .jsx . || true",

@@ -7,6 +7,7 @@ import Home from 'modules/Home/Home';
 import Missing from 'modules/Home/Missing';
 import Team from 'modules/Team/Team';
 import Donor from 'modules/Donor/Donor';
+import Project from 'modules/Project/Project';
 import Os from 'modules/Os/Os';
 
 const Routes = () => (
@@ -19,6 +20,9 @@ const Routes = () => (
     </Route>
     <Route path="/donor">
       <Donor />
+    </Route>
+    <Route path="/project">
+      <Project />
     </Route>
     <Route path="/os">
       <Os />
