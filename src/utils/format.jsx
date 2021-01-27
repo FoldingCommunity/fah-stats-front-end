@@ -29,10 +29,12 @@ PrettyDate.propTypes = {
   date: PropTypes.string.isRequired,
 };
 
-export const PrettyCount = ({ count }) => (count?.toLocaleString(
-  undefined, { maximumFractionDigits: 0 },
+export const PrettyCount = ({ count, maximumFractionDigits }) => (count?.toLocaleString(
+  undefined, { maximumFractionDigits: maximumFractionDigits || 0 },
 ) || (<span>{count}</span>));
 PrettyCount.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  maximumFractionDigits: PropTypes.number,
   count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 

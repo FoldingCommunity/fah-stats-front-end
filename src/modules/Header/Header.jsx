@@ -29,6 +29,7 @@ const styles = {
     display: inline-block;
     font-family: Raleway;
     font-weight: 400;
+    font-size: 1.2rem;
     color: white;
     border-bottom: 2px solid transparent;
     padding: .5rem;
@@ -54,6 +55,7 @@ const Header = () => (
       <NavLink key="home" to="/" css={styles.link} exact>Home</NavLink>,
       <NavLink key="team" to="/team" css={styles.link}>Team</NavLink>,
       <NavLink key="donor" to="/donor" css={styles.link}>Donor</NavLink>,
+      <NavLink key="project" to="/project" css={styles.link}>Project</NavLink>,
       <NavLink key="os" to="/os" css={styles.link}>OS</NavLink>,
     ]}
   />

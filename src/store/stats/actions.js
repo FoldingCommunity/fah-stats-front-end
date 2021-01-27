@@ -38,6 +38,7 @@ const {
   team,
   teamMonthly,
   os,
+  project,
 } = slice.actions;
 export const getTeamMonthly = ({
   year, month,
@@ -104,6 +105,19 @@ export const getOs = () => async (dispatch) => {
   try {
     const res = await fetch.get(`${apiHost}/os`);
     dispatch(os(formatList(res)));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const getProject = () => async (dispatch) => {
+  try {
+    const resAs = await fetch.get(`${apiHost}/as`);
+    if (resAs?.[0]) {
+      const res = await fetch.get(`https://${resAs?.[0]}/api/project/summary`);
+      dispatch(project(formatResult(res)));
+    }
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

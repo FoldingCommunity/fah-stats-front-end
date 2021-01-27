@@ -29,6 +29,10 @@ const slice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.os = action.payload;
     },
+    project: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.project = action.payload;
+    },
   },
 });
 export default slice;
