@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PrettyCount } from 'utils/format';
 
 const DonorTeamProfile = ({ team }) => (
   <>
     <h4>{`${team.name} (${team.team})`}</h4>
-    <div>{`Score: ${team.score}`}</div>
-    <div>{`WUs: ${team.wus}`}</div>
+    <p>
+      <span>Earned </span>
+      <strong><PrettyCount count={team.score} /></strong>
+      <span> points by contributing </span>
+      <strong><PrettyCount count={team.wus} /></strong>
+      <span> work units</span>
+    </p>
   </>
 );
 DonorTeamProfile.propTypes = {
