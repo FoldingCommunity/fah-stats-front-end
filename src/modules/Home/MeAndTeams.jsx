@@ -25,8 +25,10 @@ const styles = {
   clearIcon: css`
     position: absolute;
     right: 0;
-    padding: 0.5rem;
+    margin: 0.15rem;
+    padding: 0.35rem;
     cursor: pointer;
+    background-color: white;
   `,
   teams: css`
     > div {
@@ -55,11 +57,7 @@ const MeAndTeams = () => {
   const myself = stats?.myself?.[0];
 
   return myself ? (
-    <>
-      <DonorProfile donor={myself} />
-      <br />
-      <Button type="primary" onClick={clearSearch}>Change Donor Name</Button>
-    </>
+    <DonorProfile donor={myself} editAction={clearSearch} />
   ) : (
     <Form
       css={styles.container}
@@ -83,7 +81,7 @@ const MeAndTeams = () => {
         </span>
         <Button type="primary" htmlType="submit">
           <SearchOutlined />
-          Search my Donor Name
+          Search
         </Button>
       </div>
     </Form>

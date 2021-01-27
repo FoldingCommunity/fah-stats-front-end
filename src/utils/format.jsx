@@ -14,6 +14,9 @@ dayjs.extend(localizedFormat);
 
 const styles = {
   certified: css`
+    > span {
+      color: #fe6215;
+    }
     vertical-align: middle;
     .anticon {
       margin-right: 0.25rem;
