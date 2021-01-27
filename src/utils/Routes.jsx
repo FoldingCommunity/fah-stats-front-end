@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 import Home from 'modules/Home/Home';
 import Missing from 'modules/Home/Missing';
-import TeamMonthly from 'modules/TeamMonthly/TeamMonthly';
 import Team from 'modules/Team/Team';
 import Donor from 'modules/Donor/Donor';
 import Os from 'modules/Os/Os';
@@ -14,9 +13,6 @@ const Routes = () => (
   <Switch>
     <Route exact path="/">
       <Home />
-    </Route>
-    <Route path="/team-monthly">
-      <TeamMonthly />
     </Route>
     <Route path="/team">
       <Team />

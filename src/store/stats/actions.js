@@ -34,18 +34,16 @@ const formatResult = (res) => {
 const {
   myself,
   donor,
+  donorMonthly,
   team,
   teamMonthly,
   os,
 } = slice.actions;
 export const getTeamMonthly = ({
-  year, month, teamId, teamName, teamNameSearchType,
+  year, month,
 }) => async (dispatch) => {
   try {
     const res = await fetch.get(`${apiHost}/team/monthly`, {
-      name: teamName,
-      search_type: teamNameSearchType,
-      team: teamId,
       month,
       year,
     });
@@ -66,6 +64,21 @@ export const getTeam = ({
     });
 
     dispatch(team(formatResult(res)));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const getDonorMonthly = ({
+  year, month,
+}) => async (dispatch) => {
+  try {
+    const res = await fetch.get(`${apiHost}/user/monthly`, {
+      month,
+      year,
+    });
+    dispatch(donorMonthly(formatResult(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

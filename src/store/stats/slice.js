@@ -11,7 +11,11 @@ const slice = createSlice({
     },
     donor: (state, action) => {
       // eslint-disable-next-line no-param-reassign
-      state.donors = action.payload;
+      state.donor = action.payload;
+    },
+    donorMonthly: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.donorMonthly = action.payload;
     },
     team: (state, action) => {
       // eslint-disable-next-line no-param-reassign

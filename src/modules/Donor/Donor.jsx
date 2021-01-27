@@ -1,81 +1,34 @@
-import DataTable from 'elements/DataTable/DataTable';
-import React, { useEffect } from 'react';
-import { getDonor } from 'store/stats/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { css } from '@emotion/react';
-import Header from 'modules/Donor/Header';
-import { PrettyCount } from 'utils/format';
+import { Tabs } from 'antd';
+import DonorAllTime from 'modules/Donor/AllTime/DonorAllTime';
+import DonorMonthly from 'modules/Donor/Monthly/DonorMonthly';
 
+const { TabPane } = Tabs;
 const styles = {
-  dNameIdContainer: css`
-    display: flex;
+  tabbedContent: css`
+    .ant-tabs-nav {
+      margin: 0;
+      padding: 0;
+    }
   `,
-  dName: css`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  `,
-  dId: css`
-    flex: 1;
-    text-align: right;
-    margin-left: 0.5rem;
-    color: #CCCCCC;
+  tabPaneContent: css`
+    background-color: white;
+    padding: 1rem;
   `,
 };
-const Donor = () => {
-  const dispatch = useDispatch();
+const Team = () => (
+  <>
+    <h1>Donor Statistics</h1>
+    <Tabs type="card" css={styles.tabbedContent}>
+      <TabPane tab="Monthly" key="1" css={styles.tabPaneContent}>
+        <DonorMonthly />
+      </TabPane>
+      <TabPane tab="All-Time" key="2" css={styles.tabPaneContent}>
+        <DonorAllTime />
+      </TabPane>
+    </Tabs>
+  </>
+);
 
-  useEffect(() => {
-    dispatch(getDonor({}));
-  }, []);
-
-  const stats = useSelector((state) => state.stats);
-  const columns = [
-    {
-      title: 'Donor Name',
-      dataIndex: 'name',
-      key: 'name',
-      width: 200,
-      fixed: 'left',
-      render: (text, data) => (
-        <span css={styles.dNameIdContainer}>
-          <span css={styles.dName}>{text}</span>
-          <span css={styles.dId}>{data.id}</span>
-        </span>
-      ),
-      sorter: (a, b) => a.name.localeCompare(b.name),
-    },
-    {
-      title: 'Credit',
-      dataIndex: 'credit',
-      key: 'credit',
-      align: 'right',
-      width: 200,
-      render: (count) => <PrettyCount count={count} />,
-      sorter: (a, b) => a.credit - b.credit,
-    },
-    {
-      title: 'WUs',
-      dataIndex: 'wus',
-      key: 'wus',
-      align: 'right',
-      width: 200,
-      render: (count) => <PrettyCount count={count} />,
-      sorter: (a, b) => a.wus - b.wus,
-    },
-  ];
-
-  return (
-    <>
-      <h1>Donor Statistics</h1>
-      <Header />
-      <DataTable
-        columns={columns}
-        dataSource={stats?.donors}
-        pagination={{ defaultPageSize: 10 }}
-      />
-    </>
-  );
-};
-
-export default Donor;
+export default Team;

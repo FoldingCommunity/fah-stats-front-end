@@ -51,11 +51,10 @@ const Header = () => (
       </NavLink>
       )}
     extra={[
-      <NavLink key="0" to="/" css={styles.link} exact>Home</NavLink>,
-      <NavLink key="1" to="/team-monthly" css={styles.link}>Team Monthly</NavLink>,
-      <NavLink key="2" to="/team" css={styles.link}>Team</NavLink>,
-      <NavLink key="3" to="/donor" css={styles.link}>Donor</NavLink>,
-      <NavLink key="4" to="/os" css={styles.link}>OS</NavLink>,
+      <NavLink key="home" to="/" css={styles.link} exact>Home</NavLink>,
+      <NavLink key="team" to="/team" css={styles.link}>Team</NavLink>,
+      <NavLink key="donor" to="/donor" css={styles.link}>Donor</NavLink>,
+      <NavLink key="os" to="/os" css={styles.link}>OS</NavLink>,
     ]}
   />
 );
