@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { getProject } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrettyCount } from 'utils/format';
+import { dotCompare } from 'utils/sort';
 
 const ProjectActive = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const ProjectActive = () => {
       dataIndex: 'ws',
       key: 'ws',
       width: 200,
-      sorter: (a, b) => a?.ws?.localeCompare(b?.ws),
+      sorter: (a, b) => dotCompare(a?.ws, b?.ws),
     },
     {
       title: 'Atoms',
