@@ -69,7 +69,6 @@ const Server = () => {
       dataIndex: 'types',
       key: 'types',
       width: 200,
-      fixed: 'left',
       render: (types) => types && Object.keys(types)?.join(', '),
     },
   ];

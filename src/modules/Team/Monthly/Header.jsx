@@ -45,15 +45,17 @@ const Header = () => {
         css={styles.width12}
         value={month}
         onChange={setMonth}
+        key="month"
       >
-        { MONTHS.map((m, i) => <Select.Option value={(i + 1)}>{m}</Select.Option>) }
+        { MONTHS.map((m, i) => <Select.Option key={m} value={(i + 1)}>{m}</Select.Option>) }
       </Select>
       <Select
         css={styles.width10}
         value={year}
         onChange={setYear}
+        key="year"
       >
-        { YEARS().map((y) => <Select.Option value={y}>{y}</Select.Option>) }
+        { YEARS().map((y) => <Select.Option key={y} value={y}>{y}</Select.Option>) }
       </Select>
     </Form>
   );
