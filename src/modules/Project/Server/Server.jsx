@@ -20,7 +20,7 @@ const Server = () => {
       key: 'address',
       width: 200,
       fixed: 'left',
-      sorter: (a, b) => a?.address?.localeCompare(b?.address),
+      sorter: (a, b) => dotCompare(a?.address, b?.address),
     },
     {
       title: 'Host',

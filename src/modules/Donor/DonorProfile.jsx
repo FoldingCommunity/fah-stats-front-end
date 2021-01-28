@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { PrettyDate, PrettyCount, CertificateLink } from 'utils/format';
 import DonorTeamProfile from 'modules/Donor/DonorTeamProfile';
-import { Card, Button } from 'antd';
+import { Badge, Card, Button } from 'antd';
 import { SmileTwoTone, EditOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
@@ -37,8 +37,20 @@ const styles = {
     max-height: 20rem;
     overflow-y: auto;
   `,
-  card: css`
+  cardContainer: css`
     max-width: 25rem;
+    .ant-ribbon {
+      top: 5rem;
+    }
+    &.topRankedDonor {
+    }
+  `,
+  otherRankedDonor: css`
+    .ant-ribbon {
+      opacity: 0;
+    }
+  `,
+  card: css`
     border-color: transparent;
     box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f, 0 5px 12px 4px #00000017;
     .ant-card-meta {
@@ -84,53 +96,66 @@ const DonorProfile = ({ donor, editAction }) => {
   }
   footerActions.push(`ID: ${donor.id}`);
 
+  const topRankedDonor = (donor?.rank >= 1 && donor?.rank <= 100);
+
   return (
-    <Card
-      actions={footerActions}
-      css={styles.card}
-      cover={(
-        <Meta
-          avatar={<SmileTwoTone css={styles.coverSmile} twoToneColor="#fe6215" />}
-          title={donor.name}
-          description={(
-            <>
-              <span>Rank </span>
-              <span css={styles.cardRank}><PrettyCount count={donor.rank || donor.users} /></span>
-              <span> of </span>
-              <PrettyCount count={donor.users} />
-            </>
-          )}
-        />
-      )}
+    <div css={[
+      styles.cardContainer, (topRankedDonor ? styles.topRankedDonor : styles.otherRankedDonor),
+    ]}
     >
-      <p>
-        <span>I have earned </span>
-        <strong><PrettyCount count={donor.score} /></strong>
-        <span> points by contibuting </span>
-        <strong><PrettyCount count={donor.wus} /></strong>
-        <span> work units. </span>
-        { donor?.last && (
-          <>
-            <span>My work unit was last recorded </span>
-            <PrettyDate date={donor.last} />
-          </>
-        ) }
-      </p>
+      <Badge.Ribbon text={topRankedDonor ? 'Top Ranked Donor' : ''}>
+        <Card
+          actions={footerActions}
+          css={styles.card}
+          cover={(
+            <Meta
+              avatar={<SmileTwoTone css={styles.coverSmile} twoToneColor="#fe6215" />}
+              title={donor.name}
+              description={(
+                <>
+                  <span>Rank </span>
+                  <span css={styles.cardRank}>
+                    <PrettyCount count={donor.rank || donor.users} />
+                  </span>
+                  <span> of </span>
+                  <PrettyCount count={donor.users} />
+                </>
+              )}
+            />
+          )}
+        >
+          <p>
+            <span>I have earned </span>
+            <strong><PrettyCount count={donor.score} /></strong>
+            <span> points by contibuting </span>
+            <strong><PrettyCount count={donor.wus} /></strong>
+            <span> work units. </span>
+            { donor?.last && (
+              <>
+                <span>My work unit was last recorded </span>
+                <PrettyDate date={donor.last} />
+              </>
+            ) }
+          </p>
 
-      <h3 css={styles.subTitle}>Active clients</h3>
-      <p>
-        <strong><PrettyCount count={donor.active_50} /></strong>
-        <span> within 50 days</span>
-        <br />
-        <strong><PrettyCount count={donor.active_7} /></strong>
-        <span> within 7 days</span>
-      </p>
+          <h3 css={styles.subTitle}>Active clients</h3>
+          <p>
+            <strong><PrettyCount count={donor.active_50} /></strong>
+            <span> within 50 days</span>
+            <br />
+            <strong><PrettyCount count={donor.active_7} /></strong>
+            <span> within 7 days</span>
+          </p>
 
-      <h3 css={styles.subTitle}>My Teams</h3>
-      <ul css={styles.teams}>
-        {donor?.teams?.map((team) => (<li key={team.team}><DonorTeamProfile team={team} /></li>))}
-      </ul>
-    </Card>
+          <h3 css={styles.subTitle}>My Teams</h3>
+          <ul css={styles.teams}>
+            {donor?.teams?.map((team) => (
+              <li key={team.team}><DonorTeamProfile team={team} /></li>
+            ))}
+          </ul>
+        </Card>
+      </Badge.Ribbon>
+    </div>
   );
 };
 DonorProfile.propTypes = {
