@@ -29,6 +29,30 @@ const formatResult = (res) => {
   if (res?.status === 'error') { kvList = []; }
   return kvList;
 };
+const formatServers = (res) => {
+  const ws = {};
+
+  Object.keys(res).forEach((domain) => {
+    let ip;
+    let cloned;
+
+    (res[domain]?.ws || []).forEach((server) => {
+      cloned = { ...server };
+      ip = cloned.address;
+      cloned.type = (cloned.is_cs && !cloned?.jobs?.total ? 'CS' : 'WS');
+
+      ws[ip] = { ...ws[ip], ...cloned };
+    });
+
+    cloned = { ...res[domain] };
+    delete cloned.ws;
+    ip = cloned.address;
+    cloned.type = 'AS';
+    ws[ip] = { ...cloned, ...ws[ip] };
+  });
+
+  return Object.values(ws);
+};
 
 // Actions
 const {
@@ -39,10 +63,10 @@ const {
   teamMonthly,
   os,
   project,
+  server,
 } = slice.actions;
-export const getTeamMonthly = ({
-  year, month,
-}) => async (dispatch) => {
+
+export const getTeamMonthly = ({ year, month }) => async (dispatch) => {
   try {
     const res = await fetch.get(`${apiHost}/team/monthly`, {
       month,
@@ -55,9 +79,7 @@ export const getTeamMonthly = ({
   }
 };
 
-export const getTeam = ({
-  teamName,
-}) => async (dispatch) => {
+export const getTeam = ({ teamName }) => async (dispatch) => {
   try {
     const url = (teamName ? `${apiHost}/team/find` : `${apiHost}/team`);
     const res = await fetch.get(url, {
@@ -71,9 +93,7 @@ export const getTeam = ({
   }
 };
 
-export const getDonorMonthly = ({
-  year, month,
-}) => async (dispatch) => {
+export const getDonorMonthly = ({ year, month }) => async (dispatch) => {
   try {
     const res = await fetch.get(`${apiHost}/user/monthly`, {
       month,
@@ -86,9 +106,7 @@ export const getDonorMonthly = ({
   }
 };
 
-export const getDonor = ({
-  donorName,
-}) => async (dispatch) => {
+export const getDonor = ({ donorName }) => async (dispatch) => {
   try {
     const url = (donorName ? `${apiHost}/user/find` : `${apiHost}/user`);
     const res = await fetch.get(url, {
@@ -124,9 +142,22 @@ export const getProject = () => async (dispatch) => {
   }
 };
 
-export const getDonorByName = ({
-  donorName,
-}) => async (dispatch) => {
+export const getServer = () => async (dispatch) => {
+  try {
+    const res = {};
+    const domains = await fetch.get(`${apiHost}/as`);
+
+    await Promise.all(domains.map(async (domain) => {
+      res[domain] = await fetch.get(`https://${domain}/api/ws/summary`);
+    }));
+    dispatch(server(formatServers(res)));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const getDonorByName = ({ donorName }) => async (dispatch) => {
   const computedDonorName = donorName || localStorage.getItem('donorName');
 
   if (!computedDonorName) {

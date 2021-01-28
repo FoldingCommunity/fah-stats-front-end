@@ -36,7 +36,7 @@ const DonorMonthly = () => {
           <span css={styles.dId}>{data.id}</span>
         </span>
       ),
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a?.name?.localeCompare(b?.name),
     },
     {
       title: 'Credit',
@@ -64,7 +64,7 @@ const DonorMonthly = () => {
       <DataTable
         columns={columns}
         dataSource={stats?.donorMonthly}
-        pagination={{ defaultPageSize: 10 }}
+        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
       />
     </>
   );
