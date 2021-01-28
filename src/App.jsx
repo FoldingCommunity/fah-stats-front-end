@@ -6,6 +6,7 @@ import Header from 'modules/Header/Header';
 import Routes from 'utils/Routes';
 import { BrowserRouter } from 'react-router-dom';
 import store from 'store';
+import { ProgressBar } from 'react-fetch-progressbar';
 
 const styles = {
   container: css`
@@ -36,6 +37,7 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div css={styles.header}>
+        <ProgressBar style={{ backgroundColor: '#fe6215', height: '1px' }} />
         <div css={[styles.container, styles.containerHeader]}><Header /></div>
       </div>
       <div css={[styles.container, styles.containerBody]}><Routes /></div>
