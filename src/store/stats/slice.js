@@ -33,6 +33,10 @@ const slice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.project = action.payload;
     },
+    server: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.server = action.payload;
+    },
   },
 });
 export default slice;

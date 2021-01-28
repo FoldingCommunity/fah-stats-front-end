@@ -19,7 +19,7 @@ const Os = () => {
       key: 'OS',
       width: 100,
       fixed: 'left',
-      sorter: (a, b) => a.OS.localeCompare(b.OS),
+      sorter: (a, b) => a?.OS?.localeCompare(b?.OS),
     },
     {
       title: 'AMD GPUs',
@@ -74,7 +74,7 @@ const Os = () => {
       <DataTable
         columns={columns}
         dataSource={stats?.os}
-        pagination={{ defaultPageSize: 10 }}
+        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
       />
     </>
   );

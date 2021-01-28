@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { Tabs } from 'antd';
 import ProjectActive from 'modules/Project/Active/ProjectActive';
+import ServerStat from 'modules/Project/ServerStat/ServerStat';
 
 const { TabPane } = Tabs;
 const styles = {
@@ -22,6 +23,9 @@ const Team = () => (
     <Tabs type="card" css={styles.tabbedContent}>
       <TabPane tab="Active Projects" key="1" css={styles.tabPaneContent}>
         <ProjectActive />
+      </TabPane>
+      <TabPane tab="Server Stats" key="2" css={styles.tabPaneContent}>
+        <ServerStat />
       </TabPane>
     </Tabs>
   </>

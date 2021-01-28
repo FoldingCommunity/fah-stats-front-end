@@ -26,7 +26,7 @@ const ProjectActive = () => {
       dataIndex: 'ws',
       key: 'ws',
       width: 200,
-      sorter: (a, b) => a.ws.localeCompare(b.ws),
+      sorter: (a, b) => a?.ws?.localeCompare(b?.ws),
     },
     {
       title: 'Atoms',
@@ -69,25 +69,23 @@ const ProjectActive = () => {
       dataIndex: 'type',
       key: 'type',
       width: 200,
-      sorter: (a, b) => a.type.localeCompare(b.type),
+      sorter: (a, b) => a?.type?.localeCompare(b?.type),
     },
     {
       title: 'Contact',
       dataIndex: 'contact',
       key: 'contact',
       width: 200,
-      sorter: (a, b) => a.contact.localeCompare(b.contact),
+      sorter: (a, b) => a?.contact?.localeCompare(b?.contact),
     },
   ];
 
   return (
-    <>
-      <DataTable
-        columns={columns}
-        dataSource={stats?.project}
-        pagination={{ defaultPageSize: 10 }}
-      />
-    </>
+    <DataTable
+      columns={columns}
+      dataSource={stats?.project}
+      pagination={{ defaultPageSize: 10, showSizeChanger: true }}
+    />
   );
 };
 

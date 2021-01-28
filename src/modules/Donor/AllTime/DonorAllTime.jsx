@@ -43,7 +43,7 @@ const DonorAllTime = () => {
           <span css={styles.dId}>{data.id}</span>
         </span>
       ),
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a?.name?.localeCompare(b?.name),
     },
     {
       title: 'Credit',
@@ -71,7 +71,7 @@ const DonorAllTime = () => {
       <DataTable
         columns={columns}
         dataSource={stats?.donor}
-        pagination={{ defaultPageSize: 10 }}
+        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
       />
     </>
   );

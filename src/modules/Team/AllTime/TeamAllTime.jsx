@@ -72,7 +72,7 @@ const TeamAllTime = () => {
           <span css={styles.dId}>{data.team}</span>
         </span>
       ),
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a?.name?.localeCompare(b?.name),
     },
     {
       title: 'Credit',
@@ -98,7 +98,7 @@ const TeamAllTime = () => {
       key: 'founder',
       width: 200,
       render: (count) => <PrettyCount count={count} />,
-      sorter: (a, b) => a.founder.localeCompare(b.founder),
+      sorter: (a, b) => a?.founder?.localeCompare(b?.founder),
     },
   ];
 
@@ -108,7 +108,7 @@ const TeamAllTime = () => {
       <DataTable
         columns={columns}
         dataSource={stats?.team}
-        pagination={{ defaultPageSize: 10 }}
+        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
       />
     </>
   );

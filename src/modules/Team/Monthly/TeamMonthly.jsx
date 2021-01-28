@@ -36,7 +36,7 @@ const TeamMonthly = () => {
           <span css={styles.dId}>{data.team}</span>
         </span>
       ),
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a?.name?.localeCompare(b?.name),
     },
     {
       title: 'Credit',
@@ -64,7 +64,7 @@ const TeamMonthly = () => {
       <DataTable
         columns={columns}
         dataSource={stats?.teamMonthly}
-        pagination={{ defaultPageSize: 10 }}
+        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
       />
     </>
   );
