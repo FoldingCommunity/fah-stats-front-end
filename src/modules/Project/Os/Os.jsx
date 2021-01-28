@@ -69,14 +69,11 @@ const Os = () => {
   ];
 
   return (
-    <>
-      <h1>OS Statistics</h1>
-      <DataTable
-        columns={columns}
-        dataSource={stats?.os}
-        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
-      />
-    </>
+    <DataTable
+      columns={columns}
+      dataSource={stats?.os}
+      pagination={{ defaultPageSize: 10, showSizeChanger: true }}
+    />
   );
 };
 

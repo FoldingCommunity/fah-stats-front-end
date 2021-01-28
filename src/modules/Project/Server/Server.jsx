@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PrettyCount } from 'utils/format';
 import { dotCompare } from 'utils/sort';
 
-const ServerStat = () => {
+const Server = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -75,14 +75,12 @@ const ServerStat = () => {
   ];
 
   return (
-    <>
-      <DataTable
-        columns={columns}
-        dataSource={stats?.server}
-        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
-      />
-    </>
+    <DataTable
+      columns={columns}
+      dataSource={stats?.server}
+      pagination={{ defaultPageSize: 10, showSizeChanger: true }}
+    />
   );
 };
 
-export default ServerStat;
+export default Server;
