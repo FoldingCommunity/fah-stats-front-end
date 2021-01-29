@@ -42,10 +42,10 @@ const styles = {
     .ant-ribbon {
       top: 5rem;
     }
-    &.topRankedDonor {
+    &.topRankDonor {
     }
   `,
-  otherRankedDonor: css`
+  otherRankDonor: css`
     .ant-ribbon {
       opacity: 0;
     }
@@ -96,14 +96,35 @@ const DonorProfile = ({ donor, editAction }) => {
   }
   footerActions.push(`ID: ${donor.id}`);
 
-  const topRankedDonor = (donor?.rank >= 1 && donor?.rank <= 100);
+  const rank = donor?.rank;
+  let topRankDonor;
+  let topRankPos;
+  let topRankColor;
+
+  if (rank >= 1 && rank <= 100) {
+    topRankDonor = true;
+    topRankPos = '100';
+    topRankColor = '#ad8b00';
+  } else if (rank <= 1000) {
+    topRankDonor = true;
+    topRankPos = '1K';
+    topRankColor = '#fe6215';
+  } else if (rank <= 10000) {
+    topRankDonor = true;
+    topRankPos = '10K';
+    topRankColor = '#1890ff';
+  } else {
+    topRankDonor = false;
+    topRankPos = '';
+    topRankColor = '#fe6215';
+  }
 
   return (
     <div css={[
-      styles.cardContainer, (topRankedDonor ? styles.topRankedDonor : styles.otherRankedDonor),
+      styles.cardContainer, (topRankDonor ? styles.topRankDonor : styles.otherRankDonor),
     ]}
     >
-      <Badge.Ribbon text={topRankedDonor ? 'Top Ranked Donor' : ''}>
+      <Badge.Ribbon text={topRankDonor ? `Top ${topRankPos} Ranked Donor` : ''} style={{ backgroundColor: topRankColor }}>
         <Card
           actions={footerActions}
           css={styles.card}
