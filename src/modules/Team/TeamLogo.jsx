@@ -21,11 +21,11 @@ const styles = {
 };
 const imageLoad = (logo) => (logo?.replace('http:', 'https:'));
 const isDefaultImage = (logo) => (!logo || (logo && logo.includes('foldingathome.org')));
-const TeamLogo = ({ logo }) => {
+const TeamLogo = ({ logo, overrideStyles }) => {
   const [defaultLogo, setDefaultLogo] = useState(isDefaultImage(logo));
 
   return (
-    <span css={styles.dLogo}>
+    <span css={[styles.dLogo, overrideStyles]}>
       {
         defaultLogo
           ? <TeamOutlined />
@@ -37,5 +37,7 @@ const TeamLogo = ({ logo }) => {
 
 TeamLogo.propTypes = {
   logo: PropTypes.string, // eslint-disable-line
+  // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
+  overrideStyles: PropTypes.object,
 };
 export default TeamLogo;

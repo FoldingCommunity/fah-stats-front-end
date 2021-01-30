@@ -33,11 +33,19 @@ const styles = {
     box-shadow: black 0px 0px 8px 0px;
   `,
 };
+const oldStyles = {
+  progressBar: {
+    backgroundColor: '#fe6215',
+    height: '3px',
+    opacity: '0.75',
+    position: 'fixed',
+  },
+};
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div css={styles.header}>
-        <ProgressBar style={{ backgroundColor: '#fe6215', height: '1px' }} />
+        <ProgressBar style={oldStyles.progressBar} />
         <div css={[styles.container, styles.containerHeader]}><Header /></div>
       </div>
       <div css={[styles.container, styles.containerBody]}><Routes /></div>

@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from 'modules/Team/AllTime/Header';
 import { css } from '@emotion/react';
 import { Tooltip } from 'antd';
-import { PrettyCount } from 'utils/format';
+import { PrettyCount, SetupURL } from 'utils/format';
 import TeamLogo from 'modules/Team/TeamLogo';
+import { Link } from 'react-router-dom';
 
 const styles = {
   dNameIdContainer: css`
@@ -29,7 +30,6 @@ const styles = {
     color: #CCCCCC;
   `,
 };
-const setupURL = (url) => ((url && !url.includes('http')) ? `https://${url}` : url);
 const TeamAllTime = () => {
   const dispatch = useDispatch();
 
@@ -47,12 +47,12 @@ const TeamAllTime = () => {
       fixed: 'left',
       render: (text, data) => (
         <span css={styles.dNameIdContainer}>
-          <a target="_blank" rel="noopener noreferrer" href={setupURL(data?.url)}>
-            <Tooltip title={setupURL(data?.url)}>
+          <Tooltip title={SetupURL(data?.url)}>
+            <a target="_blank" rel="noopener noreferrer" href={SetupURL(data?.url)}>
               <TeamLogo logo={data?.logo} />
-            </Tooltip>
-          </a>
-          <span css={styles.dName}>{text}</span>
+            </a>
+          </Tooltip>
+          <Link css={styles.dName} target="_blank" to={`/team/${data.team}`}>{text}</Link>
           <span css={styles.dId}>{data.team}</span>
         </span>
       ),

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Tooltip } from 'antd';
 import PropTypes from 'prop-types';
-import { SafetyCertificateTwoTone } from '@ant-design/icons';
+import { TrophyTwoTone } from '@ant-design/icons';
 import { css } from '@emotion/react';
 
 import dayjs from 'dayjs';
@@ -24,6 +24,8 @@ const styles = {
   `,
 };
 
+export const SetupURL = (url) => ((url && !url.includes('http')) ? `https://${url}` : url);
+
 export const PrettyDate = ({ date }) => (date ? (<Tooltip title={date}>{`${dayjs(date).fromNow(true)} ago`}</Tooltip>) : (<span>{date}</span>));
 PrettyDate.propTypes = {
   date: PropTypes.string.isRequired,
@@ -40,7 +42,7 @@ PrettyCount.propTypes = {
 
 export const CertificateLink = ({ id, text, type }) => (id && text && type && (
   <a target="_blank" rel="noopener noreferrer" href={`https://apps.foldingathome.org/awards?user=${id}&type=${type}`} css={styles.certified}>
-    <SafetyCertificateTwoTone twoToneColor="#fe6215" />
+    <TrophyTwoTone twoToneColor="#fe6215" />
     <span>{text}</span>
   </a>
 ));
