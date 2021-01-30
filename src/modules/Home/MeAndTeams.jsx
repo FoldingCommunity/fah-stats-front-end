@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
 import { css } from '@emotion/react';
-import { getDonorMyself, clearDonorByName } from 'store/stats/actions';
+import { getDonorMyself, clearDonorMyself } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import DonorCard from 'modules/Donor/DonorCard';
 
@@ -51,7 +51,7 @@ const MeAndTeams = () => {
   };
   const clearSearch = () => {
     setDonorName();
-    dispatch(clearDonorByName());
+    dispatch(clearDonorMyself());
   };
   const stats = useSelector((state) => state.stats);
   const myself = stats?.myself?.[0];

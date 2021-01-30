@@ -62,6 +62,7 @@ const {
   donorProfile,
   team,
   teamMonthly,
+  teamProfile,
   os,
   project,
   server,
@@ -158,7 +159,7 @@ export const getServer = () => async (dispatch) => {
   }
 };
 
-const getDonorByName = ({
+const getDonorByNameId = ({
   donorName, donorId, action, isMyself,
 }) => async (dispatch) => {
   try {
@@ -190,21 +191,48 @@ const getDonorByName = ({
 };
 
 export const getDonorProfile = ({ donorName, donorId }) => async (dispatch) => {
-  dispatch(getDonorByName({
+  dispatch(getDonorByNameId({
     donorName, donorId, action: donorProfile,
   }));
 };
 
 export const getDonorMyself = ({ donorName, donorId }) => async (dispatch) => {
-  dispatch(getDonorByName({
+  dispatch(getDonorByNameId({
     donorName, donorId, action: myself, isMyself: true,
   }));
 };
 
-export const clearDonorByName = () => async (dispatch) => {
+export const clearDonorMyself = () => async (dispatch) => {
   try {
     localStorage.removeItem('donorName');
     dispatch(myself());
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const getTeamByNameId = ({
+  teamName, teamId,
+}) => async (dispatch) => {
+  try {
+    dispatch(teamProfile([]));
+
+    const computedTeamName = teamName;
+    const computedTeamId = teamId;
+    if (!computedTeamName && !computedTeamId) {
+      return;
+    }
+
+    let res;
+    if (computedTeamId) {
+      res = await fetch.get(`${apiHost}/team/${computedTeamId}`);
+    } else if (computedTeamName) {
+      res = await fetch.get(`${apiHost}/team/find`, { name: computedTeamName });
+    }
+
+    const formattedRes = formatResult(res);
+    dispatch(teamProfile(formattedRes));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

@@ -6,6 +6,8 @@ import Header from 'modules/Team/AllTime/Header';
 import { css } from '@emotion/react';
 import { Tooltip } from 'antd';
 import { PrettyCount } from 'utils/format';
+import TeamLogo from 'modules/Team/TeamLogo';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_LOGO = '/static/logo.png';
 const styles = {
@@ -63,12 +65,12 @@ const TeamAllTime = () => {
       fixed: 'left',
       render: (text, data) => (
         <span css={styles.dNameIdContainer}>
-          <a target="_blank" rel="noopener noreferrer" href={setupURL(data?.url)}>
-            <Tooltip title={setupURL(data?.url)}>
-              <img alt="" src={imageLoad(data)} onError={setDefaultImage} css={styles.dLogo} />
-            </Tooltip>
-          </a>
-          <span css={styles.dName}>{text}</span>
+          <Tooltip title={setupURL(data?.url)}>
+            <a target="_blank" rel="noopener noreferrer" href={setupURL(data?.url)}>
+              <TeamLogo logo={data?.logo} />
+            </a>
+          </Tooltip>
+          <Link css={styles.dName} target="_blank" to={`/team/${data.team}`}>{text}</Link>
           <span css={styles.dId}>{data.team}</span>
         </span>
       ),
