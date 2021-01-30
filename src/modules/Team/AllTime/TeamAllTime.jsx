@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 import { Tooltip } from 'antd';
 import { PrettyCount } from 'utils/format';
 
-const DEFAULT_LOGO = '/logo.png';
+const DEFAULT_LOGO = '/static/logo.png';
 const styles = {
   dNameIdContainer: css`
     display: flex;
