@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PrettyCount } from 'utils/format';
 
-const DonorTeamProfile = ({ team }) => (
+const DonorCardTeam = ({ team }) => (
   <>
     <h4>{`${team.name} (${team.team})`}</h4>
     <p>
@@ -14,9 +14,9 @@ const DonorTeamProfile = ({ team }) => (
     </p>
   </>
 );
-DonorTeamProfile.propTypes = {
+DonorCardTeam.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   team: PropTypes.object.isRequired,
 };
 
-export default DonorTeamProfile;
+export default DonorCardTeam;

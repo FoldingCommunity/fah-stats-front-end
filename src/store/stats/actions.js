@@ -59,6 +59,7 @@ const {
   myself,
   donor,
   donorMonthly,
+  donorProfile,
   team,
   teamMonthly,
   os,
@@ -157,26 +158,47 @@ export const getServer = () => async (dispatch) => {
   }
 };
 
-export const getDonorByName = ({ donorName }) => async (dispatch) => {
-  const computedDonorName = donorName || localStorage.getItem('donorName');
-
-  if (!computedDonorName) {
-    dispatch(myself([]));
-    return;
-  }
+const getDonorByName = ({
+  donorName, donorId, action, isMyself,
+}) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${apiHost}/user/find`, {
-      name: computedDonorName,
-    });
-    const formattedRes = formatResult(res);
-    if (formattedRes.length) {
-      localStorage.setItem('donorName', computedDonorName);
+    dispatch(action([]));
+
+    const computedDonorName = donorName || (isMyself && localStorage.getItem('donorName'));
+    const computedDonorId = donorId || (isMyself && localStorage.getItem('donorId'));
+    if (!computedDonorName && !computedDonorId) {
+      return;
     }
-    dispatch(myself(formattedRes));
+
+    let res;
+    if (computedDonorId) {
+      res = await fetch.get(`${apiHost}/uid/${computedDonorId}`);
+    } else if (computedDonorName) {
+      res = await fetch.get(`${apiHost}/user/find`, { name: computedDonorName });
+    }
+
+    const formattedRes = formatResult(res);
+    if (isMyself && formattedRes.length) {
+      localStorage.setItem('donorName', formattedRes?.[0]?.name);
+      localStorage.setItem('donorId', formattedRes?.[0]?.id);
+    }
+    dispatch(action(formattedRes));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
   }
+};
+
+export const getDonorProfile = ({ donorName, donorId }) => async (dispatch) => {
+  dispatch(getDonorByName({
+    donorName, donorId, action: donorProfile,
+  }));
+};
+
+export const getDonorMyself = ({ donorName, donorId }) => async (dispatch) => {
+  dispatch(getDonorByName({
+    donorName, donorId, action: myself, isMyself: true,
+  }));
 };
 
 export const clearDonorByName = () => async (dispatch) => {

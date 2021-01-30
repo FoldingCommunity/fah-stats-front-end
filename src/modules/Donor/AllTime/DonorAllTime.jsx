@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { css } from '@emotion/react';
 import Header from 'modules/Donor/AllTime/Header';
 import { PrettyCount } from 'utils/format';
+import { Link } from 'react-router-dom';
 
 const styles = {
   dNameIdContainer: css`
@@ -39,7 +40,7 @@ const DonorAllTime = () => {
       fixed: 'left',
       render: (text, data) => (
         <span css={styles.dNameIdContainer}>
-          <span css={styles.dName}>{text}</span>
+          <Link css={styles.dName} target="_blank" to={`/donor/${data.id}`}>{text}</Link>
           <span css={styles.dId}>{data.id}</span>
         </span>
       ),

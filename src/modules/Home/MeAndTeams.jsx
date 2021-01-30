@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
 import { css } from '@emotion/react';
-import { getDonorByName, clearDonorByName } from 'store/stats/actions';
+import { getDonorMyself, clearDonorByName } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import DonorProfile from 'modules/Donor/DonorProfile';
+import DonorCard from 'modules/Donor/DonorCard';
 
 const styles = {
   container: css`
@@ -44,10 +44,10 @@ const MeAndTeams = () => {
   const [donorName, setDonorName] = useState();
 
   useEffect(() => {
-    dispatch(getDonorByName({}));
+    dispatch(getDonorMyself({}));
   }, []);
   const triggerSearch = () => {
-    dispatch(getDonorByName({ donorName }));
+    dispatch(getDonorMyself({ donorName }));
   };
   const clearSearch = () => {
     setDonorName();
@@ -57,7 +57,7 @@ const MeAndTeams = () => {
   const myself = stats?.myself?.[0];
 
   return myself ? (
-    <DonorProfile donor={myself} editAction={clearSearch} />
+    <DonorCard donor={myself} editAction={clearSearch} />
   ) : (
     <Form
       css={styles.container}
