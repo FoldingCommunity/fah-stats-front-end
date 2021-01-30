@@ -46,7 +46,7 @@ const Header = () => (
     title={(
       <NavLink to="/">
         <span css={styles.logo}>
-          <img alt="FOLDING@HOME" src="./logo-2.png" height="50" />
+          <img alt="FOLDING@HOME" src="/logo-2.png" height="50" />
           <span>Statistics</span>
         </span>
       </NavLink>
