@@ -5,7 +5,7 @@
   "homepage": "/",
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired build && npm run setup-docs",
     "setup-docs": "cp _config.yml build;cp CNAME build;cp -R static/* build/static/;rm -rf docs;mv build docs",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint-fix": "eslint --ext .js --ext .jsx . --fix",
@@ -13,7 +13,6 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
-  "proxy": "http://localhost:3001/",
   "eslintConfig": {
     "extends": [
       "react-app",
