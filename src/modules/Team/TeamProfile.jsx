@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import TeamCard from 'modules/Team/TeamCard';
+import TeamCard from 'modules/Team/TeamCard';
 import { getTeamByNameId } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,8 +18,7 @@ const TeamProfile = () => {
   return (
     <>
       <h1>Team Statistics</h1>
-      { JSON.stringify(team) }
-      {/* {team && <TeamCard team={team} />} */}
+      {team && <TeamCard team={team} />}
     </>
   );
 };
