@@ -2,22 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { SetupURL } from 'utils/format';
-import { Badge, Card } from 'antd';
+import {
+  Badge, Card, Row, Col,
+} from 'antd';
 
 const { Meta } = Card;
 const styles = {
   subTitle: css`
     border-bottom: 1px solid #DDD;
   `,
-  summaryContainer: css`
-    display: flex;
+  detailsContainer: css`
     img {
-      max-width: 20rem;
-      max-height: 20rem;
+      max-width: 100%;
+      height: auto!important;
     }
-    p {
-      flex: 1;
-      margin-right: 1rem;
+  `,
+  summaryContainer: css`
+    img {
+      max-width: 100%;
+      height: auto;
     }
   `,
   dLogo: css`
@@ -88,22 +91,25 @@ const ProjectCard = ({ project }) => {
           )}
         >
           <h3 css={styles.subTitle}>Summary</h3>
-          <div css={styles.summaryContainer}>
-            {/* eslint-disable-next-line react/no-danger */}
-            <p dangerouslySetInnerHTML={{
-              __html: project.mdescription.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
-            }}
-            />
-            <div>
+          <Row css={styles.summaryContainer} gutter={[16, 16]}>
+            <Col lg={{ span: 12, order: 1 }} order={2}>
+              {/* eslint-disable-next-line react/no-danger */}
+              <p dangerouslySetInnerHTML={{
+                __html: project.mdescription.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
+              }}
+              />
+            </Col>
+            <Col lg={{ span: 12, order: 2 }} order={1}>
               <img alt="" src={`data:image/png;base64,${project.mthumb}`} />
-            </div>
-          </div>
-
+            </Col>
+          </Row>
           <h3 css={styles.subTitle}>Details</h3>
-          {/* eslint-disable-next-line react/no-danger */}
-          <p dangerouslySetInnerHTML={{
-            __html: project.description.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
-          }}
+          <p
+            css={styles.detailsContainer}
+            /* eslint-disable-next-line react/no-danger */
+            dangerouslySetInnerHTML={{
+              __html: project.description.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
+            }}
           />
         </Card>
       </Badge.Ribbon>
