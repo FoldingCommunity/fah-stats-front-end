@@ -41,6 +41,10 @@ const slice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.project = action.payload;
     },
+    projectProfile: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.projectProfile = action.payload;
+    },
     server: (state, action) => {
       // eslint-disable-next-line no-param-reassign
       state.server = action.payload;

@@ -4,6 +4,7 @@ import { getProject } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrettyCount } from 'utils/format';
 import { dotCompare } from 'utils/sort';
+import { Link } from 'react-router-dom';
 
 const ProjectActive = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ const ProjectActive = () => {
       key: 'id',
       width: 100,
       fixed: 'left',
+      render: (text) => (
+        <Link target="_blank" to={`/project/${text}`}>{text}</Link>
+      ),
       sorter: (a, b) => a.id - b.id,
     },
     {

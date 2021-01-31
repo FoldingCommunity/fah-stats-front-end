@@ -10,6 +10,7 @@ import TeamProfile from 'modules/Team/TeamProfile';
 import Donor from 'modules/Donor/Donor';
 import DonorProfile from 'modules/Donor/DonorProfile';
 import Project from 'modules/Project/Project';
+import ProjectProfile from 'modules/Project/ProjectProfile';
 
 const Routes = () => (
   <Switch>
@@ -30,6 +31,9 @@ const Routes = () => (
     </Route>
     <Route exact path="/project">
       <Project />
+    </Route>
+    <Route exact path="/project/:id">
+      <ProjectProfile />
     </Route>
     <Route path="*">
       <Missing />
