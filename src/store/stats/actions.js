@@ -65,6 +65,7 @@ const {
   teamProfile,
   os,
   project,
+  projectProfile,
   server,
 } = slice.actions;
 
@@ -212,7 +213,7 @@ export const clearDonorMyself = () => async (dispatch) => {
   }
 };
 
-export const getTeamByNameId = ({
+export const getTeamProfile = ({
   teamName, teamId,
 }) => async (dispatch) => {
   try {
@@ -233,6 +234,29 @@ export const getTeamByNameId = ({
 
     const formattedRes = formatResult(res);
     dispatch(teamProfile(formattedRes));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const getProjectProfile = ({
+  projectId,
+}) => async (dispatch) => {
+  try {
+    dispatch(projectProfile([]));
+
+    const computedProjectId = projectId;
+    if (!computedProjectId) {
+      return;
+    }
+
+    let res;
+    if (computedProjectId) {
+      res = await fetch.get(`${apiHost}/project/${computedProjectId}`);
+      const formattedRes = formatResult(res);
+      dispatch(projectProfile(formattedRes));
+    }
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

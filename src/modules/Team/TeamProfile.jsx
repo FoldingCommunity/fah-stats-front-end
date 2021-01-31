@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import TeamCard from 'modules/Team/TeamCard';
-import { getTeamByNameId } from 'store/stats/actions';
+import { getTeamProfile } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const TeamProfile = () => {
@@ -9,7 +9,7 @@ const TeamProfile = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getTeamByNameId({ teamId: id }));
+    dispatch(getTeamProfile({ teamId: id }));
   }, []);
 
   const stats = useSelector((state) => state.stats);
