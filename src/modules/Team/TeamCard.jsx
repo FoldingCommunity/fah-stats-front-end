@@ -68,11 +68,13 @@ const TeamCard = ({ team }) => {
   ];
 
   const rank = team?.rank;
-  let topRankTeam;
-  let topRankPos;
-  let topRankColor;
+  let topRankTeam = false;
+  let topRankPos = '';
+  let topRankColor = '#fe6215';
 
-  if (rank >= 1 && rank <= 100) {
+  if (typeof rank !== 'number') {
+    // Default
+  } else if (rank >= 1 && rank <= 100) {
     topRankTeam = true;
     topRankPos = '100';
     topRankColor = '#ad8b00';
@@ -85,9 +87,7 @@ const TeamCard = ({ team }) => {
     topRankPos = '10K';
     topRankColor = '#1890ff';
   } else {
-    topRankTeam = false;
-    topRankPos = '';
-    topRankColor = '#fe6215';
+    // Default
   }
 
   return (
@@ -107,7 +107,7 @@ const TeamCard = ({ team }) => {
                 <>
                   <span>Rank </span>
                   <span css={styles.cardRank}>
-                    <PrettyCount count={team.rank || team.users} />
+                    <PrettyCount count={team.rank || team.users || '-'} />
                   </span>
                 </>
               )}

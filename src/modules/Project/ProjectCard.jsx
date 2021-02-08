@@ -79,7 +79,7 @@ const ProjectCard = ({ project }) => {
       styles.cardContainer,
     ]}
     >
-      <Badge.Ribbon text={`disease: ${project?.cause}`}>
+      <Badge.Ribbon text={`cause: ${project?.cause}`}>
         <Card
           actions={footerActions}
           css={styles.card}
