@@ -14,6 +14,11 @@ const ProjectActive = () => {
   }, []);
 
   const stats = useSelector((state) => state.stats);
+  const setFilters = (field) => ({
+    filters: [...new Set(stats?.project?.map((item) => item[field]))]
+      .map((item) => ({ text: item, value: item })),
+    onFilter: (value, record) => record[field].indexOf(value) === 0,
+  });
   const columns = [
     {
       title: 'Project ID',
@@ -32,6 +37,7 @@ const ProjectActive = () => {
       key: 'ws',
       width: 200,
       sorter: (a, b) => dotCompare(a?.ws, b?.ws),
+      ...setFilters('ws'),
     },
     {
       title: 'Atoms',
@@ -75,6 +81,7 @@ const ProjectActive = () => {
       key: 'type',
       width: 200,
       sorter: (a, b) => a?.type?.localeCompare(b?.type),
+      ...setFilters('type'),
     },
     {
       title: 'Contact',
@@ -82,6 +89,7 @@ const ProjectActive = () => {
       key: 'contact',
       width: 200,
       sorter: (a, b) => a?.contact?.localeCompare(b?.contact),
+      ...setFilters('contact'),
     },
   ];
 
