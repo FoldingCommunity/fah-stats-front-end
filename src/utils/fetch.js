@@ -46,11 +46,16 @@ async function request(url, params, method = 'GET') {
   }
 
   const response = await fetch(modUrl, options);
+  let result;
 
-  if (response.status !== 200) {
-    return generateErrorResponse('The server responded with an unexpected status.');
+  try {
+    result = await response.json();
+  } catch {
+    // Do Nothing
   }
-  const result = await response.json();
+  if (response.status !== 200) {
+    return generateErrorResponse(result?.error || 'The server responded with an unexpected status.');
+  }
 
   return result;
 }

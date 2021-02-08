@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Tabs } from 'antd';
 import PropTypes from 'prop-types';
 import MeAndTeams from 'modules/Home/MeAndTeams';
+import CruTeam from 'modules/Home/CruTeam';
 
 const { TabPane } = Tabs;
 const myeStyles = {
@@ -101,8 +102,8 @@ const Home = () => (
       <TabPane tab="Me & My Teams" key="1" css={styles.tabPaneContent}>
         <MeAndTeams />
       </TabPane>
-      <TabPane tab="Create / Modify a Team" key="2" css={styles.tabPaneContent}>
-        <Iframe title="" src="https://apps.foldingathome.org/team" height="400" width="100%" />
+      <TabPane tab="Create My Team" key="2" css={styles.tabPaneContent}>
+        <CruTeam />
       </TabPane>
     </Tabs>
   </div>

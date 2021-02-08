@@ -33,6 +33,10 @@ const slice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.teamMonthly = action.payload;
     },
+    createTeamStatus: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.createTeamStatus = action.payload;
+    },
     os: (state, action) => {
       // eslint-disable-next-line no-param-reassign
       state.os = action.payload;

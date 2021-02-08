@@ -1,7 +1,9 @@
 import slice from 'store/stats/slice';
 import fetch from 'utils/fetch';
 
-const apiHost = process.env.apiHost || 'https://api2.foldingathome.org';
+const apiHostRead = process.env.apiHostRead || 'https://api2.foldingathome.org';
+const apiHostWrite = process.env.apiHostRead || 'https://api.foldingathome.org';
+
 const formatList = (list) => {
   const kvList = [];
   let keys;
@@ -63,6 +65,7 @@ const {
   team,
   teamMonthly,
   teamProfile,
+  createTeamStatus,
   os,
   project,
   projectProfile,
@@ -71,7 +74,7 @@ const {
 
 export const getTeamMonthly = ({ year, month }) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${apiHost}/team/monthly`, {
+    const res = await fetch.get(`${apiHostRead}/team/monthly`, {
       month,
       year,
     });
@@ -84,7 +87,7 @@ export const getTeamMonthly = ({ year, month }) => async (dispatch) => {
 
 export const getTeam = ({ teamName }) => async (dispatch) => {
   try {
-    const url = (teamName ? `${apiHost}/team/find` : `${apiHost}/team`);
+    const url = (teamName ? `${apiHostRead}/team/find` : `${apiHostRead}/team`);
     const res = await fetch.get(url, {
       name: teamName,
     });
@@ -96,9 +99,30 @@ export const getTeam = ({ teamName }) => async (dispatch) => {
   }
 };
 
+export const createTeam = ({
+  name, email, founder, url, logo, password,
+}) => async (dispatch) => {
+  try {
+    const postUrl = `${apiHostWrite}/team/create`;
+    const res = await fetch.post(postUrl, {
+      name,
+      email,
+      founder,
+      url,
+      logo,
+      password,
+    });
+    dispatch(createTeamStatus(res));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+    dispatch(createTeamStatus(e));
+  }
+};
+
 export const getDonorMonthly = ({ year, month }) => async (dispatch) => {
   try {
-    const res = await fetch.get(`${apiHost}/user/monthly`, {
+    const res = await fetch.get(`${apiHostRead}/user/monthly`, {
       month,
       year,
     });
@@ -111,7 +135,7 @@ export const getDonorMonthly = ({ year, month }) => async (dispatch) => {
 
 export const getDonor = ({ donorName }) => async (dispatch) => {
   try {
-    const url = (donorName ? `${apiHost}/user/find` : `${apiHost}/user`);
+    const url = (donorName ? `${apiHostRead}/user/find` : `${apiHostRead}/user`);
     const res = await fetch.get(url, {
       name: donorName,
     });
@@ -124,7 +148,7 @@ export const getDonor = ({ donorName }) => async (dispatch) => {
 
 export const getOs = () => async (dispatch) => {
   try {
-    const res = await fetch.get(`${apiHost}/os`);
+    const res = await fetch.get(`${apiHostRead}/os`);
     dispatch(os(formatList(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -134,7 +158,7 @@ export const getOs = () => async (dispatch) => {
 
 export const getProject = () => async (dispatch) => {
   try {
-    const resAs = await fetch.get(`${apiHost}/as`);
+    const resAs = await fetch.get(`${apiHostRead}/as`);
     if (resAs?.[0]) {
       const res = await fetch.get(`https://${resAs?.[0]}/api/project/summary`);
       dispatch(project(formatResult(res)));
@@ -148,7 +172,7 @@ export const getProject = () => async (dispatch) => {
 export const getServer = () => async (dispatch) => {
   try {
     const res = {};
-    const domains = await fetch.get(`${apiHost}/as`);
+    const domains = await fetch.get(`${apiHostRead}/as`);
 
     await Promise.all(domains.map(async (domain) => {
       res[domain] = await fetch.get(`https://${domain}/api/ws/summary`);
@@ -174,9 +198,9 @@ const getDonorByNameId = ({
 
     let res;
     if (computedDonorId) {
-      res = await fetch.get(`${apiHost}/uid/${computedDonorId}`);
+      res = await fetch.get(`${apiHostRead}/uid/${computedDonorId}`);
     } else if (computedDonorName) {
-      res = await fetch.get(`${apiHost}/user/find`, { name: computedDonorName });
+      res = await fetch.get(`${apiHostRead}/user/find`, { name: computedDonorName });
     }
 
     const formattedRes = formatResult(res);
@@ -227,9 +251,9 @@ export const getTeamProfile = ({
 
     let res;
     if (computedTeamId) {
-      res = await fetch.get(`${apiHost}/team/${computedTeamId}`);
+      res = await fetch.get(`${apiHostRead}/team/${computedTeamId}`);
     } else if (computedTeamName) {
-      res = await fetch.get(`${apiHost}/team/find`, { name: computedTeamName });
+      res = await fetch.get(`${apiHostRead}/team/find`, { name: computedTeamName });
     }
 
     const formattedRes = formatResult(res);
@@ -253,7 +277,7 @@ export const getProjectProfile = ({
 
     let res;
     if (computedProjectId) {
-      res = await fetch.get(`${apiHost}/project/${computedProjectId}`);
+      res = await fetch.get(`${apiHostRead}/project/${computedProjectId}`);
       const formattedRes = formatResult(res);
       dispatch(projectProfile(formattedRes));
     }
