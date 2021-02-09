@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { css } from '@emotion/react';
 import { PrettyCount } from 'utils/format';
 import { Link } from 'react-router-dom';
+import { Statistic, Tag } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 const styles = {
   dNameIdContainer: css`
@@ -22,9 +24,59 @@ const styles = {
     color: #CCCCCC;
   `,
 };
+const getStyles = (num) => {
+  let ret = {};
+
+  if (num > 0) {
+    ret = {
+      color: { color: '#3f8600' },
+      arrow: <ArrowUpOutlined />,
+    };
+  } else if (num < 0) {
+    ret = {
+      color: { color: '#cf1322' },
+      arrow: <ArrowDownOutlined />,
+    };
+  }
+
+  return ret;
+};
 const TeamMonthly = () => {
   const stats = useSelector((state) => state.stats);
   const columns = [
+    {
+      title: 'Rank',
+      dataIndex: 'rank',
+      key: 'rank',
+      width: 50,
+      render: (rank) => <PrettyCount count={rank} />,
+      sorter: (a, b) => a.rank - b.rank,
+    },
+    {
+      title: 'Change',
+      dataIndex: 'change',
+      key: 'change',
+      width: 100,
+      render: (change, data) => {
+        const statStyles = getStyles(change);
+        return (
+          <>
+            { data?.previous_rank ? (
+              <>
+                <Statistic
+                  value={Math.abs(change)}
+                  valueStyle={statStyles.color}
+                  prefix={statStyles.arrow}
+                />
+                <span>Prev: </span>
+                <PrettyCount count={data.previous_rank} />
+              </>
+            ) : <Tag color="#fe6215">NEW</Tag> }
+          </>
+        );
+      },
+      sorter: (a, b) => a.change - b.change,
+    },
     {
       title: 'Team Name',
       dataIndex: 'name',
