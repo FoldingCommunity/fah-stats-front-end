@@ -2,7 +2,7 @@ import slice from 'store/stats/slice';
 import fetch from 'utils/fetch';
 
 const apiHostRead = process.env.apiHostRead || 'https://api2.foldingathome.org';
-const apiHostWrite = process.env.apiHostRead || 'https://api.foldingathome.org';
+const apiHostWrite = process.env.apiHostWrite || 'https://api.foldingathome.org';
 
 const formatList = (list) => {
   const kvList = [];
@@ -19,6 +19,27 @@ const formatList = (list) => {
     }
   });
   return kvList;
+};
+const addRanks = (current, previous) => {
+  const resPrevObj = previous.reduce((obj, item, idx) => ({
+    ...obj,
+    [`p${item?.id || item?.team}`]: {
+      ...item,
+      rank: idx + 1,
+    },
+  }), {});
+
+  return current.map((item, idx) => {
+    const previousItemKey = `p${item?.id || item?.team}`;
+    const previousRank = resPrevObj?.[previousItemKey]?.rank;
+
+    return {
+      ...item,
+      rank: idx + 1,
+      previous_rank: previousRank,
+      change: previousRank ? (previousRank - (idx + 1)) : -1,
+    };
+  });
 };
 const formatResult = (res) => {
   let kvList = [];
@@ -78,7 +99,11 @@ export const getTeamMonthly = ({ year, month }) => async (dispatch) => {
       month,
       year,
     });
-    dispatch(teamMonthly(formatResult(res)));
+    const resPrev = await fetch.get(`${apiHostRead}/team/monthly`, {
+      month: (month === 1 ? 12 : month - 1),
+      year: (month === 1 ? year - 1 : year),
+    });
+    dispatch(teamMonthly(formatResult(addRanks(res, resPrev))));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);
@@ -126,7 +151,11 @@ export const getDonorMonthly = ({ year, month }) => async (dispatch) => {
       month,
       year,
     });
-    dispatch(donorMonthly(formatResult(res)));
+    const resPrev = await fetch.get(`${apiHostRead}/user/monthly`, {
+      month: (month === 1 ? 12 : month - 1),
+      year: (month === 1 ? year - 1 : year),
+    });
+    dispatch(donorMonthly(formatResult(addRanks(res, resPrev))));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

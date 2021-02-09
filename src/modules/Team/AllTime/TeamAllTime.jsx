@@ -52,7 +52,7 @@ const TeamAllTime = () => {
               <TeamLogo logo={data?.logo} />
             </a>
           </Tooltip>
-          <Link css={styles.dName} target="_blank" to={`/team/${data.team}`}>{text}</Link>
+          <Link css={styles.dName} target="_blank" to={`/team/${data.team || data.id}`}>{text}</Link>
           <span css={styles.dId}>{data.team}</span>
         </span>
       ),
