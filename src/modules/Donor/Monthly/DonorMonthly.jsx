@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { css } from '@emotion/react';
 import { PrettyCount } from 'utils/format';
 import { Link } from 'react-router-dom';
-import { Statistic, Tag } from 'antd';
+import { Statistic, Tag, Tooltip } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 const styles = {
@@ -48,6 +48,7 @@ const DonorMonthly = () => {
       title: 'Rank',
       dataIndex: 'rank',
       key: 'rank',
+      fixed: 'left',
       width: 50,
       render: (rank) => <PrettyCount count={rank} />,
       sorter: (a, b) => a.rank - b.rank,
@@ -56,21 +57,20 @@ const DonorMonthly = () => {
       title: 'Change',
       dataIndex: 'change',
       key: 'change',
-      width: 100,
+      fixed: 'left',
+      width: 75,
       render: (change, data) => {
         const statStyles = getStyles(change);
         return (
           <>
             { data?.previous_rank ? (
-              <>
+              <Tooltip title={`Prev: ${data.previous_rank}`}>
                 <Statistic
                   value={Math.abs(change)}
                   valueStyle={statStyles.color}
                   prefix={statStyles.arrow}
                 />
-                <span>Prev: </span>
-                <PrettyCount count={data.previous_rank} />
-              </>
+              </Tooltip>
             ) : <Tag color="#fe6215">NEW</Tag> }
           </>
         );
