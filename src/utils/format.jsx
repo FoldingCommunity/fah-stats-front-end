@@ -8,9 +8,11 @@ import { css } from '@emotion/react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import utc from 'dayjs/plugin/utc';
 
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
+dayjs.extend(utc);
 
 const styles = {
   certified: css`
@@ -26,7 +28,14 @@ const styles = {
 
 export const SetupURL = (url) => ((url && !url.includes('http')) ? `https://${url}` : url);
 
-export const PrettyDate = ({ date }) => (date ? (<Tooltip title={date}>{`${dayjs(date).fromNow(true)} ago`}</Tooltip>) : (<span>{date}</span>));
+export const PrettyDate = ({ date }) => {
+  const localDate = date && dayjs.utc(date).local();
+  if (localDate) {
+    return (<Tooltip title={localDate.format()}>{`${localDate.fromNow(true)} ago`}</Tooltip>);
+  }
+  return (<span>{date}</span>);
+};
+
 PrettyDate.propTypes = {
   date: PropTypes.string.isRequired,
 };
