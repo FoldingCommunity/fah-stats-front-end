@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { Tabs } from 'antd';
 import PropTypes from 'prop-types';
 import MeAndTeams from 'modules/Home/MeAndTeams';
-import CruTeam from 'modules/Home/CruTeam';
 
 const { TabPane } = Tabs;
 const myeStyles = {
@@ -99,11 +98,8 @@ const Home = () => (
       </div>
     </div>
     <Tabs type="card" css={styles.tabbedContent}>
-      <TabPane tab="Me & My Teams" key="1" css={styles.tabPaneContent}>
+      <TabPane tab="My Donor Profile & Teams" key="1" css={styles.tabPaneContent}>
         <MeAndTeams />
-      </TabPane>
-      <TabPane tab="Create My Team" key="2" css={styles.tabPaneContent}>
-        <CruTeam />
       </TabPane>
     </Tabs>
   </div>

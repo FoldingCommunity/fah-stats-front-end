@@ -4,6 +4,7 @@ import { Tabs } from 'antd';
 import TeamAllTime from 'modules/Team/AllTime/TeamAllTime';
 import TeamMonthly from 'modules/Team/Monthly/TeamMonthly';
 import Header from 'modules/Team/AllTime/Header';
+import CruTeam from 'modules/Home/CruTeam';
 
 const { TabPane } = Tabs;
 const styles = {
@@ -31,6 +32,9 @@ const Team = () => {
         </TabPane>
         <TabPane tab="All-Time" key="2" css={styles.tabPaneContent}>
           <TeamAllTime />
+        </TabPane>
+        <TabPane tab="Create My Team" key="3" css={styles.tabPaneContent}>
+          <CruTeam />
         </TabPane>
       </Tabs>
     </>
