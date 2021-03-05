@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import { Tabs } from 'antd';
 import PropTypes from 'prop-types';
 import MeAndTeams from 'modules/Home/MeAndTeams';
+import DonorMonthlyMini from 'modules/Donor/Monthly/DonorMonthlyMini';
+import TeamMonthlyMini from 'modules/Team/Monthly/TeamMonthlyMini';
 
 const { TabPane } = Tabs;
 const myeStyles = {
@@ -100,6 +102,12 @@ const Home = () => (
     <Tabs type="card" css={styles.tabbedContent}>
       <TabPane tab="My Donor Profile & Teams" key="1" css={styles.tabPaneContent}>
         <MeAndTeams />
+      </TabPane>
+      <TabPane tab="Top Donors" key="2" css={styles.tabPaneContent}>
+        <DonorMonthlyMini />
+      </TabPane>
+      <TabPane tab="Top Teams" key="3" css={styles.tabPaneContent}>
+        <TeamMonthlyMini />
       </TabPane>
     </Tabs>
   </div>
