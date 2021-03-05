@@ -220,7 +220,7 @@ const getDonorByNameId = ({
     dispatch(action([]));
 
     const computedDonorName = donorName || (isMyself && localStorage.getItem('donorName'));
-    const computedDonorId = donorId || (isMyself && localStorage.getItem('donorId'));
+    const computedDonorId = !computedDonorName && (donorId || (isMyself && localStorage.getItem('donorId')));
     if (!computedDonorName && !computedDonorId) {
       return;
     }
