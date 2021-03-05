@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import {
   Form,
@@ -32,10 +33,11 @@ const styles = {
     cursor: pointer;
   `,
 };
-const Header = () => {
+const Header = ({ setActiveTab }) => {
   const dispatch = useDispatch();
   const [donorName, setdonorName] = useState();
   const triggerSearch = () => {
+    setActiveTab('2');
     dispatch(getDonor({ donorName }));
   };
   const clearSearch = () => {
@@ -71,6 +73,10 @@ const Header = () => {
       </div>
     </Form>
   );
+};
+
+Header.propTypes = {
+  setActiveTab: PropTypes.func, // eslint-disable-line
 };
 
 export default Header;

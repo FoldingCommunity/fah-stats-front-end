@@ -11,6 +11,8 @@ import Donor from 'modules/Donor/Donor';
 import DonorProfile from 'modules/Donor/DonorProfile';
 import Project from 'modules/Project/Project';
 import ProjectProfile from 'modules/Project/ProjectProfile';
+import Os from 'modules/Project/Os/Os';
+import Server from 'modules/Project/Server/Server';
 
 const Routes = () => (
   <Switch>
@@ -34,6 +36,12 @@ const Routes = () => (
     </Route>
     <Route exact path="/project/:id">
       <ProjectProfile />
+    </Route>
+    <Route exact path="/os">
+      <Os />
+    </Route>
+    <Route exact path="/server">
+      <Server />
     </Route>
     <Route path="*">
       <Missing />

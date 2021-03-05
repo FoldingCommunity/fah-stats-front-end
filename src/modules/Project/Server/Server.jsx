@@ -74,11 +74,14 @@ const Server = () => {
   ];
 
   return (
-    <DataTable
-      columns={columns}
-      dataSource={stats?.server}
-      pagination={{ defaultPageSize: 10, showSizeChanger: true }}
-    />
+    <>
+      <h1>Server Statistics</h1>
+      <DataTable
+        columns={columns}
+        dataSource={stats?.server}
+        pagination={{ defaultPageSize: 100, showSizeChanger: true }}
+      />
+    </>
   );
 };
 

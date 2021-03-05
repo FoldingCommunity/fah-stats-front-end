@@ -2,7 +2,6 @@ import DataTable from 'elements/DataTable/DataTable';
 import React, { useEffect } from 'react';
 import { getTeam } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from 'modules/Team/AllTime/Header';
 import { css } from '@emotion/react';
 import { Tooltip } from 'antd';
 import { PrettyCount, SetupURL } from 'utils/format';
@@ -88,7 +87,6 @@ const TeamAllTime = () => {
 
   return (
     <>
-      <Header />
       <DataTable
         columns={columns}
         dataSource={stats?.team}

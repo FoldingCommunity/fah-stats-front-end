@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { getDonor } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { css } from '@emotion/react';
-import Header from 'modules/Donor/AllTime/Header';
 import { PrettyCount } from 'utils/format';
 import { Link } from 'react-router-dom';
 
@@ -68,7 +67,6 @@ const DonorAllTime = () => {
 
   return (
     <>
-      <Header />
       <DataTable
         columns={columns}
         dataSource={stats?.donor}

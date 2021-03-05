@@ -56,6 +56,7 @@ const Header = () => (
       <NavLink key="team" to="/team" css={styles.link}>Team</NavLink>,
       <NavLink key="donor" to="/donor" css={styles.link}>Donor</NavLink>,
       <NavLink key="project" to="/project" css={styles.link}>Project</NavLink>,
+      <NavLink key="os" to="/os" css={styles.link}>OS</NavLink>,
     ]}
   />
 );
