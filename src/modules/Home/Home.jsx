@@ -1,12 +1,11 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { Tabs } from 'antd';
 import PropTypes from 'prop-types';
 import MeAndTeams from 'modules/Home/MeAndTeams';
 import DonorMonthlyMini from 'modules/Donor/Monthly/DonorMonthlyMini';
 import TeamMonthlyMini from 'modules/Team/Monthly/TeamMonthlyMini';
+import { Row, Col } from 'antd';
 
-const { TabPane } = Tabs;
 const myeStyles = {
   mye: css`
   line-height: 3.75rem;
@@ -56,7 +55,13 @@ const styles = {
   `,
   tabPaneContent: css`
     background-color: white;
-    padding: 1rem;
+    padding: 0 1rem;
+    display: flex;
+    > div {
+      transform: scale(0.9);
+      flex: 1;
+      width: 33%;
+    }
   `,
 };
 const Iframe = ({
@@ -72,14 +77,6 @@ Iframe.propTypes = {
 };
 const Home = () => (
   <div css={styles.container}>
-    <p>
-      On this page you will find access to statistics for individuals
-      and teams who have joined together to earn points and compete
-      with other teams. Some of us are quite intense in our approach
-      to folding. We have team websites, we supe up our computers,
-      and we drive the technology forward by reporting bugs and making
-      suggestions about how to improve the software.
-    </p>
     <div css={styles.intro}>
       <h2 css={myeStyles.mye}>
         <span css={myeStyles.maximize}>MAXIMIZE</span>
@@ -99,17 +96,20 @@ const Home = () => (
         </p>
       </div>
     </div>
-    <Tabs type="card" css={styles.tabbedContent}>
-      <TabPane tab="My Donor Profile & Teams" key="1" css={styles.tabPaneContent}>
+    <Row css={styles.tabPaneContent}>
+      <Col span={8}>
+        <h2>My Donor Profile</h2>
         <MeAndTeams />
-      </TabPane>
-      <TabPane tab="Top Donors" key="2" css={styles.tabPaneContent}>
+      </Col>
+      <Col span={8}>
+        <h2>Top Donors</h2>
         <DonorMonthlyMini />
-      </TabPane>
-      <TabPane tab="Top Teams" key="3" css={styles.tabPaneContent}>
+      </Col>
+      <Col span={8}>
+        <h2>Top Teams</h2>
         <TeamMonthlyMini />
-      </TabPane>
-    </Tabs>
+      </Col>
+    </Row>
   </div>
 );
 

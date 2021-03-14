@@ -64,7 +64,7 @@ const DonorMonthlyMini = () => {
       title: 'Change',
       dataIndex: 'change',
       key: 'change',
-      width: 75,
+      width: 90,
       render: (change, data) => {
         const statStyles = getStyles(change);
         return (
