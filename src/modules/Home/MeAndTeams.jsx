@@ -66,7 +66,7 @@ const MeAndTeams = () => {
       <div>
         <span css={styles.searchInput}>
           <Input
-            placeholder="Search my Donor Name"
+            placeholder="Look up my Donor Name"
             type="text"
             value={donorName}
             onChange={(event) => setDonorName(event.target.value)}
