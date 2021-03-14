@@ -56,10 +56,8 @@ const styles = {
   tabPaneContent: css`
     background-color: white;
     padding: 0 1rem;
-    display: flex;
     > div {
       transform: scale(0.9);
-      flex: 1;
       width: 33%;
     }
   `,
@@ -97,15 +95,15 @@ const Home = () => (
       </div>
     </div>
     <Row css={styles.tabPaneContent}>
-      <Col span={8}>
+      <Col xs={24} sm={24} md={24} lg={8} xl={8}>
         <h2>My Donor Profile</h2>
         <MeAndTeams />
       </Col>
-      <Col span={8}>
+      <Col xs={24} sm={24} md={24} lg={8} xl={8}>
         <h2>Top Donors</h2>
         <DonorMonthlyMini />
       </Col>
-      <Col span={8}>
+      <Col xs={24} sm={24} md={24} lg={8} xl={8}>
         <h2>Top Teams</h2>
         <TeamMonthlyMini />
       </Col>

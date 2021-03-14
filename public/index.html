@@ -32,13 +32,18 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-31WSPGGSYH"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-31WSPGGSYH');
+      const configKey = {
+        'stats.foldingathome.org': 'G-2EZQC7TTRD',
+        'statsprod.foldingathome.org': 'G-2EZQC7TTRD',
+        'statsbeta.foldingathome.org': 'G-31WSPGGSYH'
+      }
+      gtag('config', configKey[ window.location.hostname ]);
     </script>
   </body>
 </html>
