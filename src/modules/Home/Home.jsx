@@ -89,10 +89,7 @@ const Home = () => (
           Help Folding@home study proteins at the smallest scales by recruiting your friends and
           family. Tell them about the Folding@home project, and then join or start your own team.
           The more points your team earns, the more we can progress research on diseases like
-          COVID-19, Alzheimer&apos;s disease, and cancers! If you are interested in setting up a
-          team of your own, you can get started
-          <a href="/team">here</a>
-          .
+          COVID-19, Alzheimer&apos;s disease, and cancers!
         </p>
       </div>
     </div>
