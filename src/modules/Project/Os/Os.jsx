@@ -76,6 +76,20 @@ const Os = () => {
         dataSource={stats?.os}
         pagination={{ defaultPageSize: 10, showSizeChanger: true }}
       />
+      <p>
+        CPUs and GPUs which have returned Work Units within the
+        last 3 days are listed by OS. FLOPS per core is estimated.
+      </p>
+      <p>
+        <b>TFLOPS</b>
+        &nbsp;
+        is Tera Floating-point OPerations per Second or
+        trillions of math operations per second. Please see our
+        &nbsp;
+        <a href="https://foldingathome.org/support/faq/flops" rel="noreferrer" target="_blank">FLOPS FAQ</a>
+        &nbsp;
+        for more information.
+      </p>
     </>
   );
 };

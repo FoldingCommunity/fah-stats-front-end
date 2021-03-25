@@ -81,7 +81,7 @@ const MeAndTeams = () => {
         </span>
         <Button type="primary" htmlType="submit">
           <SearchOutlined />
-          Search
+          Lookup
         </Button>
       </div>
     </Form>

@@ -53,7 +53,7 @@ const Header = ({ setActiveTab }) => {
       <div>
         <span css={styles.searchInput}>
           <Input
-            placeholder="Search Donor Name"
+            placeholder="Lookup Donor Name"
             type="text"
             value={donorName}
             onChange={(event) => setdonorName(event.target.value)}
@@ -68,7 +68,7 @@ const Header = ({ setActiveTab }) => {
         </span>
         <Button type="primary" htmlType="submit">
           <SearchOutlined />
-          Search
+          Lookup
         </Button>
       </div>
     </Form>
