@@ -85,7 +85,7 @@ const TeamMonthly = () => {
       fixed: 'left',
       render: (text, data) => (
         <span css={styles.dNameIdContainer}>
-          <Link css={styles.dName} target="_blank" to={`/team/${data.team}`}>{text}</Link>
+          <Link css={styles.dName} to={`/team/${data.team}`}>{text}</Link>
           <span css={styles.dId}>{data.team}</span>
         </span>
       ),

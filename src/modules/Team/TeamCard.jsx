@@ -23,7 +23,7 @@ const styles = {
     }
   `,
   cardContainer: css`
-    max-width: 25rem;
+    max-width: 40rem;
     .ant-ribbon {
       top: 5rem;
     }

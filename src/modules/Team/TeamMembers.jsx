@@ -1,12 +1,9 @@
 import DataTable from 'elements/DataTable/DataTable';
-import Header from 'modules/Donor/Monthly/Header';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { css } from '@emotion/react';
 import { PrettyCount } from 'utils/format';
 import { Link } from 'react-router-dom';
-import { Statistic, Tag, Tooltip } from 'antd';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 const styles = {
   dNameIdContainer: css`
@@ -24,24 +21,7 @@ const styles = {
     color: #CCCCCC;
   `,
 };
-const getStyles = (num) => {
-  let ret = {};
-
-  if (num > 0) {
-    ret = {
-      color: { color: '#3f8600' },
-      arrow: <ArrowUpOutlined />,
-    };
-  } else if (num < 0) {
-    ret = {
-      color: { color: '#cf1322' },
-      arrow: <ArrowDownOutlined />,
-    };
-  }
-
-  return ret;
-};
-const DonorMonthly = () => {
+const teamMembers = () => {
   const stats = useSelector((state) => state.stats);
   const columns = [
     {
@@ -52,30 +32,6 @@ const DonorMonthly = () => {
       width: 50,
       render: (rank) => <PrettyCount count={rank} />,
       sorter: (a, b) => a.rank - b.rank,
-    },
-    {
-      title: 'Change',
-      dataIndex: 'change',
-      key: 'change',
-      fixed: 'left',
-      width: 75,
-      render: (change, data) => {
-        const statStyles = getStyles(change);
-        return (
-          <>
-            { data?.previous_rank ? (
-              <Tooltip title={`Prev: ${data.previous_rank}`}>
-                <Statistic
-                  value={Math.abs(change)}
-                  valueStyle={statStyles.color}
-                  prefix={statStyles.arrow}
-                />
-              </Tooltip>
-            ) : <Tag color="#fe6215">NEW</Tag> }
-          </>
-        );
-      },
-      sorter: (a, b) => a.change - b.change,
     },
     {
       title: 'Donor Name',
@@ -92,13 +48,13 @@ const DonorMonthly = () => {
       sorter: (a, b) => a?.name?.localeCompare(b?.name),
     },
     {
-      title: 'Credit',
-      dataIndex: 'credit',
-      key: 'credit',
+      title: 'Score',
+      dataIndex: 'score',
+      key: 'score',
       align: 'right',
       width: 200,
       render: (count) => <PrettyCount count={count} />,
-      sorter: (a, b) => a.credit - b.credit,
+      sorter: (a, b) => a.score - b.score,
     },
     {
       title: 'WUs',
@@ -113,14 +69,13 @@ const DonorMonthly = () => {
 
   return (
     <>
-      <Header />
       <DataTable
         columns={columns}
-        dataSource={stats?.donorMonthly}
-        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
+        dataSource={stats?.teamMembers}
+        pagination={{ defaultPageSize: 100, showSizeChanger: true }}
       />
     </>
   );
 };
 
-export default DonorMonthly;
+export default teamMembers;

@@ -27,7 +27,7 @@ const ProjectActive = () => {
       width: 100,
       fixed: 'left',
       render: (text) => (
-        <Link target="_blank" to={`/project/${text}`}>{text}</Link>
+        <Link to={`/project/${text}`}>{text}</Link>
       ),
       sorter: (a, b) => a.id - b.id,
     },

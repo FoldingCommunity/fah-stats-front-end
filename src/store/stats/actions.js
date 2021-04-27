@@ -85,6 +85,7 @@ const {
   donorProfile,
   team,
   teamMonthly,
+  teamMembers,
   teamProfile,
   createTeamStatus,
   os,
@@ -104,6 +105,17 @@ export const getTeamMonthly = ({ year, month }) => async (dispatch) => {
       year: (month === 1 ? year - 1 : year),
     });
     dispatch(teamMonthly(formatResult(addRanks(res, resPrev))));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e.message);
+  }
+};
+
+export const getTeamMembers = ({ teamId }) => async (dispatch) => {
+  try {
+    const res = await fetch.get(`${apiHostRead}/team/${teamId}/members`, {
+    });
+    dispatch(teamMembers(formatList(res)));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e.message);

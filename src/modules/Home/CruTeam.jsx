@@ -45,7 +45,7 @@ const CruTeam = () => {
             description={(
               <>
                 <span>Team ID: </span>
-                <Link target="_blank" to={`/team/${stats?.createTeamStatus}`}>{stats?.createTeamStatus}</Link>
+                <Link to={`/team/${stats?.createTeamStatus}`}>{stats?.createTeamStatus}</Link>
               </>
             )}
             type="success"
