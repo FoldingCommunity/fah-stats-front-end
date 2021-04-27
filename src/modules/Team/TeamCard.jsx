@@ -45,7 +45,6 @@ const styles = {
         color: #fe6215;
         margin: 0;
         font-size: 1.6rem;
-        text-transform: lowercase;
         padding: 0 0.25rem;
       }
     }
