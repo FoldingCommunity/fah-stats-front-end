@@ -38,7 +38,6 @@ const styles = {
     overflow-y: auto;
   `,
   cardContainer: css`
-    max-width: 50rem;
     .ant-ribbon {
       top: 5rem;
     }
