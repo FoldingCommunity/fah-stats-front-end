@@ -76,7 +76,7 @@ const ProjectCard = ({ project }) => {
       styles.cardContainer,
     ]}
     >
-      <Badge.Ribbon text={`cause: ${project?.cause}`}>
+      <Badge.Ribbon text={`cause: ${project?.cause}`} placement="start">
         <Card
           actions={footerActions}
           css={styles.card}
