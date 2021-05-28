@@ -74,8 +74,9 @@ const Os = () => {
       <DataTable
         columns={columns}
         dataSource={stats?.os}
-        pagination={{ defaultPageSize: 10, showSizeChanger: true }}
+        pagination={false}
       />
+      &nbsp;
       <p>
         CPUs and GPUs which have returned Work Units within the
         last 3 days are listed by OS. FLOPS per core is estimated.
