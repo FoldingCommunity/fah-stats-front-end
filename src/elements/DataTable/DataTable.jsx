@@ -19,7 +19,7 @@ const DataTable = ({ columns, dataSource, pagination }) => (
 DataTable.propTypes = {
   columns: PropTypes.array, // eslint-disable-line
   dataSource: PropTypes.array, // eslint-disable-line
-  pagination: PropTypes.object, // eslint-disable-line
+  pagination: PropTypes.bool, // eslint-disable-line
 };
 
 export default DataTable;
