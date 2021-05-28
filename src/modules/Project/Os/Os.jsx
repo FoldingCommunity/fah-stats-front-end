@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { getOs } from 'store/stats/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrettyCount } from 'utils/format';
+import { v4 as uuid } from 'uuid';
 
 const Os = () => {
   const dispatch = useDispatch();
@@ -76,7 +77,8 @@ const Os = () => {
         columns={columns}
         dataSource={stats?.os}
         pagination={false}
-        // eslint-disable-next-line no-unused-vars
+        rowKey={() => uuid()}
+        size="small"
         summary={(pageData) => {
           let tAMD = 0;
           let tNvidia = 0;
