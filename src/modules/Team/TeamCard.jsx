@@ -92,7 +92,7 @@ const TeamCard = ({ team }) => {
       styles.cardContainer, (topRankTeam ? styles.topRankTeam : styles.otherRankTeam),
     ]}
     >
-      <Badge.Ribbon text={topRankTeam ? `Top ${topRankPos} Ranked Team` : ''} style={{ backgroundColor: topRankColor }}>
+      <Badge.Ribbon text={topRankTeam ? `Top ${topRankPos} Ranked Team` : ''} style={{ backgroundColor: topRankColor }} placement="start">
         <Card
           actions={footerActions}
           css={styles.card}
