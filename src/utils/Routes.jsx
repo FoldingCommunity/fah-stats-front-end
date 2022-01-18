@@ -31,6 +31,12 @@ const Routes = () => (
     <Route exact path="/donor/:id">
       <DonorProfile />
     </Route>
+    <Route exact path="/donor/id/:id">
+      <DonorProfile />
+    </Route>
+    <Route exact path="/donor/name/:name">
+      <DonorProfile />
+    </Route>
     <Route exact path="/project">
       <Project />
     </Route>
