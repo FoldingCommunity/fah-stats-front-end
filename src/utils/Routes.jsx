@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 import Home from 'modules/Home/Home';
 import Missing from 'modules/Home/Missing';
@@ -28,9 +29,13 @@ const Routes = () => (
     <Route exact path="/donor">
       <Donor />
     </Route>
-    <Route exact path="/donor/:id">
+    <Route exact path="/donor/id/:id">
       <DonorProfile />
     </Route>
+    <Route exact path="/donor/name/:name">
+      <DonorProfile />
+    </Route>
+    <Redirect from="/donor/:id" to="/donor/id/:id" />
     <Route exact path="/project">
       <Project />
     </Route>
