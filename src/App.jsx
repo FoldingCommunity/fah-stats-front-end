@@ -7,7 +7,6 @@ import Routes from 'utils/Routes';
 import { BrowserRouter } from 'react-router-dom';
 import store from 'store';
 import { ProgressBar } from 'react-fetch-progressbar';
-import { Alert } from 'antd';
 
 const styles = {
   container: css`
@@ -22,8 +21,8 @@ const styles = {
       width: 1170px;
     }
     .ant-alert-message {
-    
-    }  
+
+    }
   `,
   alertBanner: css`
     text-align: center;
@@ -53,19 +52,6 @@ const App = () => (
     <BrowserRouter>
       <div css={styles.header}>
         <ProgressBar style={oldStyles.progressBar} />
-        <Alert
-          css={styles.alertBanner}
-          type="info"
-          showIcon={false}
-          message={(
-            <span>
-              Welcome to the new Folding@home stats website!
-              The classic version is available at&nbsp;
-              <a href="https://statsclassic.foldingathome.org" target="_blank" rel="noreferrer">https://statsclassic.foldingathome.org</a>
-              .
-            </span>
-          )}
-        />
         <div css={[styles.container, styles.containerHeader]}><Header /></div>
       </div>
       <div css={[styles.container, styles.containerBody]}><Routes /></div>
