@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Make sure we have the "prod" remote
-if git remote get-url prod 2&>1 >/dev/null; then
+if git remote get-url prod 2>&1 >/dev/null; then
   echo "Adding 'prod' remote"
   git remote add prod \
       git@github.com:FoldingCommunity/fah-stats-front-end-prod.git
