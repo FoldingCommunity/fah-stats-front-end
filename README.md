@@ -11,6 +11,14 @@ https://statsprod.foldingathome.org
 ### Production
 https://stats.foldingathome.org
 
+To publish to the production site do the following:
+
+```
+git clone https://github.com/FoldingCommunity/fah-stats-front-end.git
+cd fah-stats-front-end
+./publish
+```
+
 ### What is Folding@Home Statistics
 One of the best ways to help Folding@home is by recruiting your friends and family. Start by sharing our project with them. Then join a team or even start your own team. The more points your team earns, the closer we come to finding cures.
 

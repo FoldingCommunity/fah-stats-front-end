@@ -1,0 +1,36 @@
+#!/bin/bash -e
+
+# Make sure we have the "prod" remote
+if git remote get-url prod 2&>1 >/dev/null; then
+  echo "Adding 'prod' remote"
+  git remote add prod \
+      git@github.com:FoldingCommunity/fah-stats-front-end-prod.git
+fi
+
+# Stash any changes
+if [[ `git status --porcelain --untracked-files=no` ]]; then
+  echo "Stashing local changes"
+  STASH=true
+  git stash push
+else
+  STASH=false
+fi
+
+# Modify CNAME
+echo "Updating CNAME"
+echo -n "stats.foldingathome.org" > CNAME
+git commit -m "Change CNAME" CNAME
+
+# Push to prod
+echo "Pusing to 'prod' remote"
+git push -f prod
+
+# Restore CNAME
+echo "Restoring CNAME"
+git reset --hard HEAD^
+
+# Restore stashed changes
+if $STASH; then
+  echo "Restoring stashed changes"
+  git stash pop
+fi
