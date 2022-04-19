@@ -202,7 +202,7 @@ export const getProject = () => async (dispatch) => {
     const resAs = await fetch.get(`${apiHostRead}/as`);
     if (resAs?.[0]) {
       const res = await fetch.get(`https://${resAs?.[0]}/api/project/summary`);
-      const result = res.filter(project => project.beta || project.public);
+      const result = res.filter((prj) => prj.beta || prj.public);
       dispatch(project(formatResult(result)));
     }
   } catch (e) {
