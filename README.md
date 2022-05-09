@@ -5,6 +5,18 @@ with this website or have suggestions to improve the site, please create an
 issue on Github.  This is an Open-Source project so if you are a programmer
 you can create a pull request.
 
+# Run a development server
+Create the ssl files.
+```
+mkdir .cert # In the project root directory
+openssl req -x509 -newkey rsa:2048 -keyout .cert/key.pem -out .cert/cert.pem -days 365
+```
+
+Start the development server
+```
+npm start
+```
+
 # Beta Website
 https://foldingcommunity.github.io/fah-stats-front-end/
 https://statsbeta.foldingathome.org
