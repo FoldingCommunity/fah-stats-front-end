@@ -76,40 +76,51 @@ const ProjectCard = ({ project }) => {
       styles.cardContainer,
     ]}
     >
-      <Badge.Ribbon text={`cause: ${project?.cause}`} placement="start">
+      {(project?.status === 'error') ? (
         <Card
-          actions={footerActions}
           css={styles.card}
           cover={(
             <Meta
-              title={project?.manager}
-              description={project?.institution}
+              description="The owner has not added the description for the project."
             />
           )}
-        >
-          <h3 css={styles.subTitle}>Summary</h3>
-          <Row css={styles.summaryContainer} gutter={[16, 16]}>
-            <Col lg={{ span: 12, order: 1 }} order={2}>
-              {/* eslint-disable-next-line react/no-danger */}
-              <p dangerouslySetInnerHTML={{
-                __html: project.mdescription.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
-              }}
+        />
+      ) : (
+        <Badge.Ribbon text={`cause: ${project?.cause}`} placement="start">
+          <Card
+            actions={footerActions}
+            css={styles.card}
+            cover={(
+              <Meta
+                title={project?.manager}
+                description={project?.institution}
               />
-            </Col>
-            <Col lg={{ span: 12, order: 2 }} order={1}>
-              <img alt="" src={`data:image/png;base64,${project.mthumb}`} />
-            </Col>
-          </Row>
-          <h3 css={styles.subTitle}>Details</h3>
-          <p
-            css={styles.detailsContainer}
-            /* eslint-disable-next-line react/no-danger */
-            dangerouslySetInnerHTML={{
-              __html: project.description.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
-            }}
-          />
-        </Card>
-      </Badge.Ribbon>
+            )}
+          >
+            <h3 css={styles.subTitle}>Summary</h3>
+            <Row css={styles.summaryContainer} gutter={[16, 16]}>
+              <Col lg={{ span: 12, order: 1 }} order={2}>
+                {/* eslint-disable-next-line react/no-danger */}
+                <p dangerouslySetInnerHTML={{
+                  __html: project.mdescription.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
+                }}
+                />
+              </Col>
+              <Col lg={{ span: 12, order: 2 }} order={1}>
+                <img alt="" src={`data:image/png;base64,${project.mthumb}`} />
+              </Col>
+            </Row>
+            <h3 css={styles.subTitle}>Details</h3>
+            <p
+              css={styles.detailsContainer}
+              /* eslint-disable-next-line react/no-danger */
+              dangerouslySetInnerHTML={{
+                __html: project.description.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '),
+              }}
+            />
+          </Card>
+        </Badge.Ribbon>
+      )}
     </div>
   );
 };
