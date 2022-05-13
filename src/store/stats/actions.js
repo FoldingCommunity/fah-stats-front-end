@@ -320,8 +320,11 @@ export const getProjectProfile = ({
     let res;
     if (computedProjectId) {
       res = await fetch.get(`${apiHostRead}/project/${computedProjectId}`);
-      const formattedRes = formatResult(res);
-      dispatch(projectProfile(formattedRes));
+      if (res?.status === 'error') dispatch(projectProfile([res]));
+      else {
+        const formattedRes = formatResult([res]);
+        dispatch(projectProfile(formattedRes));
+      }
     }
   } catch (e) {
     // eslint-disable-next-line no-console
