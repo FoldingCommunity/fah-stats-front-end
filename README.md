@@ -1,6 +1,6 @@
 # Folding@Home Statistics
 This repository contains the code for the
-[Folding@home stats website](fah-stats-front-end).  If you find any problems
+[Folding@home stats website](https://stats.foldingathome.org).  If you find any problems
 with this website or have suggestions to improve the site, please create an
 issue on Github.  This is an Open-Source project so if you are a programmer
 you can create a pull request.
