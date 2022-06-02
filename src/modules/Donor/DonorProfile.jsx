@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const DonorProfile = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id, name } = useParams();
 
   useEffect(() => {
-    dispatch(getDonorProfile({ donorId: id }));
+    dispatch(getDonorProfile({ donorId: id, donorName: name }));
   }, []);
 
   const stats = useSelector((state) => state.stats);

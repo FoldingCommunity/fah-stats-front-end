@@ -13,6 +13,7 @@ import Project from 'modules/Project/Project';
 import ProjectProfile from 'modules/Project/ProjectProfile';
 import Os from 'modules/Project/Os/Os';
 import Server from 'modules/Project/Server/Server';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Routes = () => (
   <Switch>
@@ -28,9 +29,13 @@ const Routes = () => (
     <Route exact path="/donor">
       <Donor />
     </Route>
-    <Route exact path="/donor/:id">
+    <Route exact path="/donor/id/:id">
       <DonorProfile />
     </Route>
+    <Route exact path="/donor/name/:name">
+      <DonorProfile />
+    </Route>
+    <Redirect from="/donor/:id" to="/donor/id/:id" />
     <Route exact path="/project">
       <Project />
     </Route>
