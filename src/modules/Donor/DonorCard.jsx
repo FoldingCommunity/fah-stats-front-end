@@ -5,6 +5,7 @@ import { PrettyDate, PrettyCount, CertificateLink } from 'utils/format';
 import DonorCardTeam from 'modules/Donor/DonorCardTeam';
 import { Badge, Card, Button } from 'antd';
 import { SmileTwoTone, EditOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const { Meta } = Card;
 const styles = {
@@ -77,7 +78,7 @@ const styles = {
     height: auto;
   `,
 };
-const DonorCard = ({ donor, editAction }) => {
+const DonorCard = ({ donor, editAction, hasLinks }) => {
   const footerActions = [
     <CertificateLink id={donor.id} type="wus" text="My Award" key="award" />,
   ];
@@ -91,7 +92,16 @@ const DonorCard = ({ donor, editAction }) => {
       ),
     );
   }
-  footerActions.push(`ID: ${donor.id}`);
+  const idMessage = `ID: ${donor.id}`;
+  if (hasLinks) {
+    footerActions.push(
+      (
+        <Link css={styles.dId} to={`/donor/id/${donor.id}`}>
+          {idMessage}
+        </Link>
+      ),
+    );
+  } else footerActions.push(`ID: ${donor.id}`);
 
   const rank = donor?.rank;
   let topRankDonor;
@@ -128,7 +138,11 @@ const DonorCard = ({ donor, editAction }) => {
           cover={(
             <Meta
               avatar={<SmileTwoTone css={styles.coverSmile} twoToneColor="#fe6215" />}
-              title={donor.name}
+              title={(hasLinks) ? (
+                <Link css={styles.dName} to={`/donor/name/${donor.name}`}>{donor.name}</Link>
+              ) : (
+                <span>{donor.name}</span>
+              )}
               description={(
                 <>
                   <span>Rank </span>
@@ -181,6 +195,8 @@ DonorCard.propTypes = {
   donor: PropTypes.object.isRequired,
   // eslint-disable-next-line react/require-default-props
   editAction: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props
+  hasLinks: PropTypes.bool,
 };
 
 export default DonorCard;

@@ -57,7 +57,7 @@ const MeAndTeams = () => {
   const myself = stats?.myself?.[0];
 
   return myself ? (
-    <DonorCard donor={myself} editAction={clearSearch} />
+    <DonorCard donor={myself} editAction={clearSearch} hasLinks />
   ) : (
     <Form
       css={styles.container}

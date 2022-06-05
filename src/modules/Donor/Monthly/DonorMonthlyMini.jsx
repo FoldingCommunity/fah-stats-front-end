@@ -90,7 +90,7 @@ const DonorMonthlyMini = () => {
       width: 200,
       render: (text, data) => (
         <span css={styles.dNameIdContainer}>
-          <Link css={styles.dName} to={`/donor/${data.id}`}>{text}</Link>
+          <Link css={styles.dName} to={`/donor/id/${data.id}`}>{text}</Link>
           <span css={styles.dId}>{data.id}</span>
         </span>
       ),
