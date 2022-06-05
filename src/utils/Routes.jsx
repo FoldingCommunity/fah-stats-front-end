@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 import Home from 'modules/Home/Home';
 import Missing from 'modules/Home/Missing';
@@ -14,6 +15,7 @@ import ProjectProfile from 'modules/Project/ProjectProfile';
 import Os from 'modules/Project/Os/Os';
 import Server from 'modules/Project/Server/Server';
 
+const reg = new RegExp('^[0-9]+$');
 const Routes = () => (
   <Switch>
     <Route exact path="/">
@@ -34,9 +36,13 @@ const Routes = () => (
     <Route exact path="/donor/name/:name">
       <DonorProfile />
     </Route>
-    <Route exact path="/donor/:id">
-      <DonorProfile />
-    </Route>
+    <Route
+      path="/donor/:id"
+      render={({ match }) => {
+        if (reg.test(match.params.id)) return <Redirect to={`/donor/id/${match.params.id}`} />;
+        return <Redirect to={`/donor/name/${match.params.id}`} />;
+      }}
+    />
     <Route exact path="/project">
       <Project />
     </Route>
