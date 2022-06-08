@@ -176,9 +176,9 @@ export const getDonorMonthly = ({ year, month }) => async (dispatch) => {
 
 export const getDonor = ({ donorName }) => async (dispatch) => {
   try {
-    const url = (donorName ? `${apiHostRead}/user/find` : `${apiHostRead}/user`);
+    const url = (donorName ? `${apiHostRead}/search/user` : `${apiHostRead}/user`);
     const res = await fetch.get(url, {
-      name: donorName,
+      query: `%${donorName}%`,
     });
     dispatch(donor(formatResult(res)));
   } catch (e) {
