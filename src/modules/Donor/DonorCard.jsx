@@ -79,7 +79,8 @@ const styles = {
   `,
 };
 const DonorCard = ({ donor, editAction, hasLinks }) => {
-  const footerActions = [
+  const hasError = donor?.status === 'error';
+  const footerActions = hasError ? [] : [
     <CertificateLink id={donor.id} type="wus" text="My Award" key="award" />,
   ];
   if (editAction) {
@@ -93,15 +94,17 @@ const DonorCard = ({ donor, editAction, hasLinks }) => {
     );
   }
   const idMessage = `ID: ${donor.id}`;
-  if (hasLinks) {
-    footerActions.push(
-      (
-        <Link css={styles.dId} to={`/donor/id/${donor.id}`}>
-          {idMessage}
-        </Link>
-      ),
-    );
-  } else footerActions.push(`ID: ${donor.id}`);
+  if (!hasError) {
+    if (hasLinks) {
+      footerActions.push(
+        (
+          <Link css={styles.dId} to={`/donor/id/${donor.id}`}>
+            {idMessage}
+          </Link>
+        ),
+      );
+    } else footerActions.push(`ID: ${donor.id}`);
+  }
 
   const rank = donor?.rank;
   let topRankDonor;
@@ -126,7 +129,14 @@ const DonorCard = ({ donor, editAction, hasLinks }) => {
     topRankColor = '#fe6215';
   }
 
-  return (
+  return hasError ? (
+    <Card
+      actions={footerActions}
+      css={styles.card}
+    >
+      <span>There is no user with the searched username.</span>
+    </Card>
+  ) : (
     <div css={[
       styles.cardContainer, (topRankDonor ? styles.topRankDonor : styles.otherRankDonor),
     ]}
@@ -159,7 +169,7 @@ const DonorCard = ({ donor, editAction, hasLinks }) => {
           <p>
             <span>I have earned </span>
             <strong><PrettyCount count={donor.score} /></strong>
-            <span> points by contibuting </span>
+            <span> points by contributing </span>
             <strong><PrettyCount count={donor.wus} /></strong>
             <span> work units. </span>
             { donor?.last && (

@@ -116,7 +116,7 @@ const TeamCard = ({ team }) => {
             <strong>{team.founder}</strong>
             <span> and has earned </span>
             <strong><PrettyCount count={team.score} /></strong>
-            <span> points by contibuting </span>
+            <span> points by contributing </span>
             <strong><PrettyCount count={team.wus} /></strong>
             <span> work units. </span>
           </p>
