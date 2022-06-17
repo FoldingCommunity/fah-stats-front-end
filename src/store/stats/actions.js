@@ -41,7 +41,7 @@ const addRanks = (current, previous) => {
     };
   });
 };
-const formatResult = (res) => {
+const formatResult = (res, sendErrorMessage = false) => {
   let kvList = [];
 
   switch (res.constructor) {
@@ -49,7 +49,7 @@ const formatResult = (res) => {
     case Object: kvList = [res]; break;
     default:
   }
-  if (res?.status === 'error') { kvList = []; }
+  if (res?.status === 'error' && !sendErrorMessage) { kvList = []; }
   return kvList;
 };
 const formatServers = (res) => {
@@ -176,9 +176,9 @@ export const getDonorMonthly = ({ year, month }) => async (dispatch) => {
 
 export const getDonor = ({ donorName }) => async (dispatch) => {
   try {
-    const url = (donorName ? `${apiHostRead}/user/find` : `${apiHostRead}/user`);
+    const url = (donorName ? `${apiHostRead}/search/user` : `${apiHostRead}/user`);
     const res = await fetch.get(url, {
-      name: donorName,
+      query: `%${donorName}%`,
     });
     dispatch(donor(formatResult(res)));
   } catch (e) {
@@ -245,8 +245,8 @@ const getDonorByNameId = ({
       res = await fetch.get(`${apiHostRead}/user/${computedDonorName}`);
     }
 
-    const formattedRes = formatResult(res);
-    if (isMyself && formattedRes.length) {
+    const formattedRes = formatResult(res, true);
+    if (isMyself && res?.status !== 'error' && formattedRes.length) {
       localStorage.setItem('donorName', formattedRes?.[0]?.name);
       localStorage.setItem('donorId', formattedRes?.[0]?.id);
     }
@@ -322,7 +322,7 @@ export const getProjectProfile = ({
       res = await fetch.get(`${apiHostRead}/project/${computedProjectId}`);
       if (res?.status === 'error') dispatch(projectProfile([res]));
       else {
-        const formattedRes = formatResult([res]);
+        const formattedRes = formatResult(res, true);
         dispatch(projectProfile(formattedRes));
       }
     }
