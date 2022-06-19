@@ -70,9 +70,13 @@ const styles = {
 };
 const TeamCard = ({ team }) => {
   const footerActions = [
+    <a target="_blank" rel="noopener noreferrer" href={`https://apps.foldingathome.org/awards?team=${team?.id}&type=wus`} css={styles.certified}>
+      <TrophyTwoTone twoToneColor="#fe6215" />
+      <span>Team WUs Award</span>
+    </a>,
     <a target="_blank" rel="noopener noreferrer" href={`https://apps.foldingathome.org/awards?team=${team?.id}`} css={styles.certified}>
       <TrophyTwoTone twoToneColor="#fe6215" />
-      <span>Team Award</span>
+      <span>Team Points Award</span>
     </a>,
     <a target="_blank" rel="noopener noreferrer" href={SetupURL(team?.url)}>Team Website</a>,
     `ID: ${team.id}`,
