@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import { PrettyCount, SetupURL } from 'utils/format';
+import { PrettyCount, SetupURL, CertificateLink } from 'utils/format';
 import { Badge, Card } from 'antd';
-import { TrophyTwoTone } from '@ant-design/icons';
 import TeamLogo from 'modules/Team/TeamLogo';
 
 const { Meta } = Card;
@@ -70,14 +69,8 @@ const styles = {
 };
 const TeamCard = ({ team }) => {
   const footerActions = [
-    <a target="_blank" rel="noopener noreferrer" href={`https://apps.foldingathome.org/awards?team=${team?.id}&type=wus`} css={styles.certified}>
-      <TrophyTwoTone twoToneColor="#fe6215" />
-      <span>Team WUs Award</span>
-    </a>,
-    <a target="_blank" rel="noopener noreferrer" href={`https://apps.foldingathome.org/awards?team=${team?.id}`} css={styles.certified}>
-      <TrophyTwoTone twoToneColor="#fe6215" />
-      <span>Team Points Award</span>
-    </a>,
+    <CertificateLink id={team.id} type="wus" text="Team WUs Award" key="award" />,
+    <CertificateLink id={team.id} text="Team Points Award" key="award" />,
     <a target="_blank" rel="noopener noreferrer" href={SetupURL(team?.url)}>Team Website</a>,
     `ID: ${team.id}`,
   ];
