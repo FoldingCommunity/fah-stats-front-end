@@ -81,7 +81,8 @@ const styles = {
 const DonorCard = ({ donor, editAction, hasLinks }) => {
   const hasError = donor?.status === 'error';
   const footerActions = hasError ? [] : [
-    <CertificateLink id={donor.id} type="wus" text="My Award" key="award" />,
+    <CertificateLink id={donor.id} type="wus" text="WUs Award" key="award" />,
+    <CertificateLink id={donor.id} text="Points Award" key="award" />,
   ];
   if (editAction) {
     footerActions.push(
