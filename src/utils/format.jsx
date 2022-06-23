@@ -49,10 +49,13 @@ PrettyCount.propTypes = {
   count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
-export const CertificateLink = ({ id, text, type }) => {
+export const CertificateLink = ({
+  id, text, type, forUser,
+}) => {
   let url;
-  if (type) url = `https://apps.foldingathome.org/awards?user=${id}&type=${type}`;
-  else url = `https://apps.foldingathome.org/awards?user=${id}`;
+  const recipient = forUser ? 'user' : 'team';
+  if (type) url = `https://apps.foldingathome.org/awards?${recipient}=${id}&type=${type}`;
+  else url = `https://apps.foldingathome.org/awards?${recipient}=${id}`;
   return id && text && (
     <a target="_blank" rel="noopener noreferrer" href={url} css={styles.certified}>
       <TrophyTwoTone twoToneColor="#fe6215" />
@@ -65,4 +68,5 @@ CertificateLink.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   type: PropTypes.string, // eslint-disable-line
+  forUser: PropTypes.bool, // eslint-disable-line
 };
