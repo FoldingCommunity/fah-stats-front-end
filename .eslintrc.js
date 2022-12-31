@@ -19,6 +19,7 @@ module.exports = {
   ],
   rules: {
     'linebreak-style': 0,
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
   settings: {
     'import/resolver': {
