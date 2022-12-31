@@ -25,7 +25,14 @@ const teamMembers = () => {
   const stats = useSelector((state) => state.stats);
   const columns = [
     {
-      title: 'Rank',
+      title: 'Rank (team)',
+      fixed: 'left',
+      width: 50,
+      render: (text, data) => (stats?.teamMembers.indexOf(data) + 1),
+      sorter: (a, b) => a.score - b.score,
+    },
+    {
+      title: 'Rank (project)',
       dataIndex: 'rank',
       key: 'rank',
       fixed: 'left',
