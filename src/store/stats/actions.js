@@ -242,7 +242,7 @@ const getDonorByNameId = ({
     if (computedDonorId) {
       res = await fetch.get(`${apiHostRead}/uid/${computedDonorId}`);
     } else if (computedDonorName) {
-      res = await fetch.get(`${apiHostRead}/user/${computedDonorName}`);
+      res = await fetch.get(`${apiHostRead}/user/${encodeURIComponent(computedDonorName)}`);
     }
 
     const formattedRes = formatResult(res, true);
