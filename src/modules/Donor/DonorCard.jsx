@@ -142,7 +142,7 @@ const DonorCard = ({ donor, editAction, hasLinks }) => {
       styles.cardContainer, (topRankDonor ? styles.topRankDonor : styles.otherRankDonor),
     ]}
     >
-      <Badge.Ribbon text={topRankDonor ? `Top ${topRankPos} Ranked Donor` : ''} style={{ backgroundColor: topRankColor }}>
+      <Badge.Ribbon text={topRankDonor ? `Top ${topRankPos} Ranked Donor` : ''} style={{ backgroundColor: topRankColor }} placement="start">
         <Card
           actions={footerActions}
           css={styles.card}
