@@ -39,6 +39,13 @@ const TeamAllTime = () => {
   const stats = useSelector((state) => state.stats);
   const columns = [
     {
+      title: 'Rank',
+      fixed: 'left',
+      width: 50,
+      render: (data) => (stats?.team.indexOf(data) + 1),
+      sorter: (a, b) => a.credit - b.credit,
+    },
+    {
       title: 'Team Name',
       dataIndex: 'name',
       key: 'name',
