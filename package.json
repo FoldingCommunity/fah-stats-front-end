@@ -5,7 +5,7 @@
   "homepage": "/",
   "scripts": {
     "start": "export HTTPS=true&&SSL_CRT_FILE='./.cert/cert.pem'&&SSL_KEY_FILE='./.cert/key.pem' react-app-rewired start",
-    "build": "react-app-rewired build && npm run setup-docs",
+    "build": "react-app-rewired build && npm run setup-docs && cp build/index.html build/404.html",
     "setup-docs": "cp _config.yml build;cp CNAME build;",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint-fix": "eslint --ext .js --ext .jsx . --fix",
